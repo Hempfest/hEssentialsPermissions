@@ -44,7 +44,7 @@ public class UserPermissionList extends BukkitCommand {
         List<String> result = new ArrayList<>();
         if (args.length == 1) {
             arguments.clear();
-            arguments.addAll(Arrays.asList(listener.getAllGroups(p.getWorld().getName())));
+            arguments.addAll(Arrays.asList(listener.getAllUserNames(p.getWorld().getName())));
             for (String a : arguments) {
                 if (a.toLowerCase().startsWith(args[0].toLowerCase()))
                     result.add(a);
