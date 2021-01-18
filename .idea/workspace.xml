@@ -10,7 +10,10 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="b42b60b2-d90f-47a1-ad21-5568c75e59af" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/youtube/hempfest/permissions/commands/group/GroupPermissionList.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/youtube/hempfest/permissions/commands/group/GroupPermissionList.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/youtube/hempfest/permissions/commands/user/UserPermissionList.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/youtube/hempfest/permissions/HempfestPermissions.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/youtube/hempfest/permissions/HempfestPermissions.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/youtube/hempfest/permissions/util/UtilityManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/youtube/hempfest/permissions/util/UtilityManager.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -52,10 +55,10 @@
   </component>
   <component name="RecentsManager">
     <key name="CopyClassDialog.RECENTS_KEY">
+      <recent name="com.youtube.hempfest.permissions.commands.user" />
       <recent name="com.youtube.hempfest.permissions.util.events" />
       <recent name="com.youtube.hempfest.permissions.util.yml" />
       <recent name="com.youtube.hempfest.permissions.util" />
-      <recent name="com.youtube.hempfest.permissions.commands.user" />
       <recent name="com.youtube.hempfest.permissions.commands.group" />
     </key>
   </component>
@@ -96,7 +99,14 @@
       <option name="project" value="LOCAL" />
       <updated>1610964869473</updated>
     </task>
-    <option name="localTasksCounter" value="5" />
+    <task id="LOCAL-00005" summary="* Well then.. Memory leak solved. No more runnable.">
+      <created>1610964962861</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1610964962861</updated>
+    </task>
+    <option name="localTasksCounter" value="6" />
     <servers />
   </component>
   <component name="VcsManagerConfiguration">
@@ -121,10 +131,10 @@
       <screen x="306" y="1440" width="1920" height="1040" />
     </state>
     <state x="996" y="1708" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog/0.0.2560.1400/306.1440.1920.1040@306.1440.1920.1040" timestamp="1610959218615" />
-    <state x="766" y="1443" key="CommitChangelistDialog2" timestamp="1610964868921">
+    <state x="766" y="1443" key="CommitChangelistDialog2" timestamp="1610964962352">
       <screen x="306" y="1440" width="1920" height="1040" />
     </state>
-    <state x="766" y="1443" key="CommitChangelistDialog2/0.0.2560.1400/306.1440.1920.1040@306.1440.1920.1040" timestamp="1610964868921" />
+    <state x="766" y="1443" key="CommitChangelistDialog2/0.0.2560.1400/306.1440.1920.1040@306.1440.1920.1040" timestamp="1610964962352" />
     <state x="1101" y="1768" key="FileChooserDialogImpl" timestamp="1609673209808">
       <screen x="306" y="1440" width="1920" height="1040" />
     </state>
@@ -137,10 +147,10 @@
       <screen x="306" y="1440" width="1920" height="1040" />
     </state>
     <state x="898" y="1577" key="Github.UntrackedFilesDialog/0.0.2560.1400/306.1440.1920.1040@306.1440.1920.1040" timestamp="1610951410320" />
-    <state x="858" y="1689" key="Vcs.Push.Dialog.v2" timestamp="1610964870677">
+    <state x="858" y="1689" key="Vcs.Push.Dialog.v2" timestamp="1610964963957">
       <screen x="306" y="1440" width="1920" height="1040" />
     </state>
-    <state x="858" y="1689" key="Vcs.Push.Dialog.v2/0.0.2560.1400/306.1440.1920.1040@306.1440.1920.1040" timestamp="1610964870677" />
+    <state x="858" y="1689" key="Vcs.Push.Dialog.v2/0.0.2560.1400/306.1440.1920.1040@306.1440.1920.1040" timestamp="1610964963957" />
     <state x="929" y="1665" width="672" height="678" key="search.everywhere.popup" timestamp="1610955726280">
       <screen x="306" y="1440" width="1920" height="1040" />
     </state>

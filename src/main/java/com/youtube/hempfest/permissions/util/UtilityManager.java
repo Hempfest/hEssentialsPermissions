@@ -277,6 +277,14 @@ public class UtilityManager {
                 result = UUID.fromString(user);
             }
         }
+        if (result == null) {
+            for (OfflinePlayer player : Bukkit.getOfflinePlayers()) {
+                if (player.getName().equals(username)) {
+                    result = player.getUniqueId();
+                    break;
+                }
+            }
+        }
         return result;
     }
 

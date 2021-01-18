@@ -178,6 +178,9 @@ public class HempfestPermissions extends JavaPlugin {
 		ArrayList<String> aliases15 = new ArrayList<String>();
 		aliases15.addAll(Arrays.asList("gd", "gdel"));
 		registerCommand(new GroupDelete("groupdelete", "Base command for deleting groups.", "hpermissions.group.delete", "", aliases15));
+		ArrayList<String> aliases16 = new ArrayList<String>();
+		aliases7.addAll(Arrays.asList("ulp", "ulistp"));
+		registerCommand(new UserPermissionAdd("userlistp", "Base command for listing user permissions.", "hpermissions.user.list.permissions", "", aliases16));
 	}
 	
 
