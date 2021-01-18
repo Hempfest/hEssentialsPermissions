@@ -1,0 +1,119 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ArtifactsWorkspaceSettings">
+    <artifacts-to-build>
+      <artifact name="hEssentialsPermissions" />
+    </artifacts-to-build>
+  </component>
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="b42b60b2-d90f-47a1-ad21-5568c75e59af" name="Default Changelist" comment="" />
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Interface" />
+        <option value="Class" />
+      </list>
+    </option>
+  </component>
+  <component name="MavenImportPreferences">
+    <option name="generalSettings">
+      <MavenGeneralSettings>
+        <option name="mavenHome" value="C:\Program Files\JetBrains\IntelliJ IDEA Community Edition 2020.2.1\plugins\maven\lib\maven3" />
+      </MavenGeneralSettings>
+    </option>
+  </component>
+  <component name="ProjectId" id="1iEJq6WGd3hwxYmgUhBMzieZYzQ" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent">
+    <property name="AnalyzeApkAction.lastApkPath" value="$PROJECT_DIR$" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/../hEssentialsClans" />
+    <property name="project.structure.last.edited" value="Artifacts" />
+    <property name="project.structure.proportion" value="0.15" />
+    <property name="project.structure.side.proportion" value="0.2" />
+    <property name="run.code.analysis.last.selected.profile" value="pProject Default" />
+  </component>
+  <component name="RecentsManager">
+    <key name="CopyClassDialog.RECENTS_KEY">
+      <recent name="com.youtube.hempfest.permissions.util.yml" />
+      <recent name="com.youtube.hempfest.permissions.util" />
+      <recent name="com.youtube.hempfest.permissions.commands.user" />
+      <recent name="com.youtube.hempfest.permissions.commands.group" />
+      <recent name="com.youtube.hempfest.permissions.commands" />
+    </key>
+  </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="b42b60b2-d90f-47a1-ad21-5568c75e59af" name="Default Changelist" comment="" />
+      <created>1601467006161</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1601467006161</updated>
+    </task>
+    <servers />
+  </component>
+  <component name="WindowStateProjectService">
+    <state x="760" y="274" key="#Project_Structure" timestamp="1601469534774">
+      <screen x="0" y="0" width="2560" height="1400" />
+    </state>
+    <state x="760" y="274" key="#Project_Structure/0.0.2560.1400@0.0.2560.1400" timestamp="1601469534774" />
+    <state x="1120" y="1742" key="#com.intellij.ide.util.MemberChooser" timestamp="1609668651801">
+      <screen x="306" y="1440" width="1920" height="1040" />
+    </state>
+    <state x="1120" y="1742" key="#com.intellij.ide.util.MemberChooser/0.0.2560.1400/306.1440.1920.1040@306.1440.1920.1040" timestamp="1609668651801" />
+    <state x="1134" y="1742" key="#com.intellij.ide.util.MemberChooser/0.0.2560.1400/320.1440.1920.1040@320.1440.1920.1040" timestamp="1601629418819" />
+    <state x="1085" y="406" key="#com.intellij.ide.util.MemberChooser/0.0.2560.1400@0.0.2560.1400" timestamp="1601471379038" />
+    <state x="1038" y="570" key="ANALYSIS_DLG_com.intellij.analysis.BaseAnalysisAction$1" timestamp="1601469265237">
+      <screen x="0" y="0" width="2560" height="1400" />
+    </state>
+    <state x="1038" y="570" key="ANALYSIS_DLG_com.intellij.analysis.BaseAnalysisAction$1/0.0.2560.1400@0.0.2560.1400" timestamp="1601469265237" />
+    <state x="1101" y="1768" key="FileChooserDialogImpl" timestamp="1609673209808">
+      <screen x="306" y="1440" width="1920" height="1040" />
+    </state>
+    <state x="1101" y="1768" key="FileChooserDialogImpl/0.0.2560.1400/306.1440.1920.1040@306.1440.1920.1040" timestamp="1609673209808" />
+    <state x="1115" y="1768" key="FileChooserDialogImpl/0.0.2560.1400/320.1440.1920.1040@320.1440.1920.1040" timestamp="1602238313558" />
+    <state x="1060" y="441" key="FileChooserDialogImpl/0.0.2560.1400@0.0.2560.1400" timestamp="1601468975594" />
+    <state x="760" y="274" key="SettingsEditor" timestamp="1601468962046">
+      <screen x="0" y="0" width="2560" height="1400" />
+    </state>
+    <state x="760" y="274" key="SettingsEditor/0.0.2560.1400@0.0.2560.1400" timestamp="1601468962046" />
+    <state x="886" y="1570" key="com.intellij.openapi.editor.actions.MultiplePasteAction$ClipboardContentChooser" timestamp="1601804489511">
+      <screen x="320" y="1440" width="1920" height="1040" />
+    </state>
+    <state x="886" y="1570" key="com.intellij.openapi.editor.actions.MultiplePasteAction$ClipboardContentChooser/0.0.2560.1400/320.1440.1920.1040@320.1440.1920.1040" timestamp="1601804489511" />
+    <state x="662" y="1618" key="new project wizard" timestamp="1601699494747">
+      <screen x="320" y="1440" width="1920" height="1040" />
+    </state>
+    <state x="662" y="1618" key="new project wizard/0.0.2560.1400/320.1440.1920.1040@320.1440.1920.1040" timestamp="1601699494747" />
+    <state x="1436" y="443" key="refactoring.ChangeSignatureDialog" timestamp="1601470267447">
+      <screen x="0" y="0" width="2560" height="1400" />
+    </state>
+    <state x="1436" y="443" key="refactoring.ChangeSignatureDialog/0.0.2560.1400@0.0.2560.1400" timestamp="1601470267447" />
+    <state x="943" y="1665" width="672" height="678" key="search.everywhere.popup" timestamp="1601863929512">
+      <screen x="320" y="1440" width="1920" height="1040" />
+    </state>
+    <state x="943" y="1665" width="672" height="678" key="search.everywhere.popup/0.0.2560.1400/320.1440.1920.1040@320.1440.1920.1040" timestamp="1601863929512" />
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/com/youtube/hempfest/permissions/util/BukkitListener.java</url>
+          <line>17</line>
+          <option name="timeStamp" value="1" />
+        </line-breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
+  </component>
+</project>

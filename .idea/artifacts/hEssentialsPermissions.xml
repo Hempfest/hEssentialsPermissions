@@ -1,0 +1,8 @@
+<component name="ArtifactManager">
+  <artifact type="jar" name="hEssentialsPermissions">
+    <output-path>$PROJECT_DIR$/out/artifacts/hEssentialsPermissions</output-path>
+    <root id="archive" name="hEssentialsPermissions.jar">
+      <element id="module-output" name="hEssentialsPermissions" />
+    </root>
+  </artifact>
+</component>
