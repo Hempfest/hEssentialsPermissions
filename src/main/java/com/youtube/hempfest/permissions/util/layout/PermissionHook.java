@@ -1,6 +1,10 @@
 package com.youtube.hempfest.permissions.util.layout;
 
 import com.youtube.hempfest.permissions.HempfestPermissions;
+import com.youtube.hempfest.permissions.util.events.GroupPermissionUpdateEvent;
+import com.youtube.hempfest.permissions.util.events.PermissionUpdateEvent;
+import com.youtube.hempfest.permissions.util.events.UserPermissionUpdateEvent;
+import com.youtube.hempfest.permissions.util.events.misc.PermissionUpdateType;
 import com.youtube.hempfest.permissions.util.yml.Config;
 import com.youtube.hempfest.permissions.util.yml.DataManager;
 import com.youtube.hempfest.permissions.util.UtilityManager;
@@ -104,6 +108,11 @@ public class PermissionHook {
         u.set("User-List." + player.getUniqueId().toString() + ".sub-groups", groups);
         users.saveConfig();
         System.out.println(String.format("[%s] - Gave sub-group " + '"' + group + '"' + " to player " + '"' + player + '"' + " in world " + '"' + world + '"', HempfestPermissions.getInstance().getDescription().getName()));
+        PermissionUpdateEvent event = new PermissionUpdateEvent();
+        Bukkit.getPluginManager().callEvent(event);
+        if (!event.isCancelled()) {
+            event.query();
+        }
         return true;
     }
 
@@ -117,6 +126,11 @@ public class PermissionHook {
         u.set("User-List." + player.getUniqueId().toString() + ".sub-groups", groups);
         users.saveConfig();
         System.out.println(String.format("[%s] - Removed sub-group " + '"' + group + '"' + " from player " + '"' + player + '"' + " in world " + '"' + world + '"', HempfestPermissions.getInstance().getDescription().getName()));
+        PermissionUpdateEvent event = new PermissionUpdateEvent();
+        Bukkit.getPluginManager().callEvent(event);
+        if (!event.isCancelled()) {
+            event.query();
+        }
         return true;
     }
 
@@ -159,6 +173,11 @@ public class PermissionHook {
         g.set(group + ".permissions", perms);
         groups.saveConfig();
         System.out.println(String.format("[%s] - Gave permission " + '"' + permission + '"' + " to group " + '"' + group + '"' + " in world " + '"' + world + '"', HempfestPermissions.getInstance().getDescription().getName()));
+        GroupPermissionUpdateEvent event = new GroupPermissionUpdateEvent(PermissionUpdateType.Added, group, world, permission);
+        Bukkit.getPluginManager().callEvent(event);
+        if (!event.isCancelled()) {
+            event.query();
+        }
         return false;
     }
 
@@ -173,6 +192,11 @@ public class PermissionHook {
         g.set(group + ".permissions", perms);
         groups.saveConfig();
         System.out.println(String.format("[%s] - Gave permission " + '"' + permission + '"' + " to group " + '"' + group + '"' + " in world " + '"' + world + '"', HempfestPermissions.getInstance().getDescription().getName()));
+        GroupPermissionUpdateEvent event = new GroupPermissionUpdateEvent(PermissionUpdateType.Added, group, world, permission.toArray(new String[0]));
+        Bukkit.getPluginManager().callEvent(event);
+        if (!event.isCancelled()) {
+            event.query();
+        }
         return false;
     }
 
@@ -186,6 +210,11 @@ public class PermissionHook {
         g.set(group + ".permissions", perms);
         groups.saveConfig();
         System.out.println(String.format("[%s] - Removed permission " + '"' + permission + '"' + " from group " + '"' + group + '"' + " in world " + '"' + world + '"', HempfestPermissions.getInstance().getDescription().getName()));
+        GroupPermissionUpdateEvent event = new GroupPermissionUpdateEvent(PermissionUpdateType.Removed, group, world, permission);
+        Bukkit.getPluginManager().callEvent(event);
+        if (!event.isCancelled()) {
+            event.query();
+        }
         return false;
     }
 
@@ -200,6 +229,11 @@ public class PermissionHook {
         g.set(group + ".permissions", perms);
         groups.saveConfig();
         System.out.println(String.format("[%s] - Removed permission " + '"' + permission + '"' + " from group " + '"' + group + '"' + " in world " + '"' + world + '"', HempfestPermissions.getInstance().getDescription().getName()));
+        GroupPermissionUpdateEvent event = new GroupPermissionUpdateEvent(PermissionUpdateType.Removed, group, world, permission.toArray(new String[0]));
+        Bukkit.getPluginManager().callEvent(event);
+        if (!event.isCancelled()) {
+            event.query();
+        }
         return false;
     }
 
@@ -212,7 +246,12 @@ public class PermissionHook {
         perms.add(permission);
         u.set("User-List." + player.getUniqueId().toString() + ".permissions", perms);
         users.saveConfig();
-        System.out.println(String.format("[%s] - Gave permission " + '"' + permission + '"' + " to player " + '"' + player + '"' + " in world " + '"' + world + '"', HempfestPermissions.getInstance().getDescription().getName()));
+        System.out.println(String.format("[%s] - Gave permission " + '"' + permission + '"' + " to player " + '"' + player.getName() + '"' + " in world " + '"' + world + '"', HempfestPermissions.getInstance().getDescription().getName()));
+        UserPermissionUpdateEvent event = new UserPermissionUpdateEvent(PermissionUpdateType.Added, player.getUniqueId().toString(), world, permission);
+        Bukkit.getPluginManager().callEvent(event);
+        if (!event.isCancelled()) {
+            event.query();
+        }
         return true;
     }
 
@@ -227,7 +266,12 @@ public class PermissionHook {
         }
         u.set("User-List." + player.getUniqueId().toString() + ".permissions", perms);
         users.saveConfig();
-        System.out.println(String.format("[%s] - Gave permission's " + permissions.toString() + " to player " + '"' + player + '"' + " in world " + '"' + world + '"', HempfestPermissions.getInstance().getDescription().getName()));
+        System.out.println(String.format("[%s] - Gave permission's " + permissions.toString() + " to player " + '"' + player.getName() + '"' + " in world " + '"' + world + '"', HempfestPermissions.getInstance().getDescription().getName()));
+        UserPermissionUpdateEvent event = new UserPermissionUpdateEvent(PermissionUpdateType.Added, player.getUniqueId().toString(), world, permissions.toArray(new String[0]));
+        Bukkit.getPluginManager().callEvent(event);
+        if (!event.isCancelled()) {
+            event.query();
+        }
         return true;
     }
 
@@ -240,13 +284,33 @@ public class PermissionHook {
         perms.remove(permission);
         u.set("User-List." + player.getUniqueId().toString() + ".permissions", perms);
         users.saveConfig();
-        System.out.println(String.format("[%s] - Removed permission " + '"' + permission + '"' + " from player " + '"' + player + '"' + " in world " + '"' + world + '"', HempfestPermissions.getInstance().getDescription().getName()));
+        System.out.println(String.format("[%s] - Removed permission " + '"' + permission + '"' + " from player " + '"' + player.getName() + '"' + " in world " + '"' + world + '"', HempfestPermissions.getInstance().getDescription().getName()));
+        UserPermissionUpdateEvent event = new UserPermissionUpdateEvent(PermissionUpdateType.Removed, player.getUniqueId().toString(), world, permission);
+        Bukkit.getPluginManager().callEvent(event);
+        if (!event.isCancelled()) {
+            event.query();
+        }
         return true;
     }
 
    
     public boolean playerTake(OfflinePlayer player, String world, List<String> permissions) {
-        return false;
+        DataManager dm = new DataManager();
+        Config users = dm.getUsers(world);
+        FileConfiguration u = users.getConfig();
+        List<String> perms = u.getStringList("User-List." + player.getUniqueId().toString() + ".permissions");
+        for (String result : permissions) {
+            perms.remove(result);
+        }
+        u.set("User-List." + player.getUniqueId().toString() + ".permissions", perms);
+        users.saveConfig();
+        System.out.println(String.format("[%s] - Removed permission's " + permissions.toString() + " from player " + '"' + player.getName() + '"' + " in world " + '"' + world + '"', HempfestPermissions.getInstance().getDescription().getName()));
+        UserPermissionUpdateEvent event = new UserPermissionUpdateEvent(PermissionUpdateType.Removed, player.getUniqueId().toString(), world, permissions.toArray(new String[0]));
+        Bukkit.getPluginManager().callEvent(event);
+        if (!event.isCancelled()) {
+            event.query();
+        }
+        return true;
     }
 
    

@@ -17,10 +17,9 @@ import com.youtube.hempfest.permissions.commands.user.UserPermissionRemove;
 import com.youtube.hempfest.permissions.commands.user.UserSetGroup;
 import com.youtube.hempfest.permissions.commands.user.UserSubGroupAdd;
 import com.youtube.hempfest.permissions.commands.user.UserSubGroupRemove;
-import com.youtube.hempfest.permissions.util.BukkitListener;
+import com.youtube.hempfest.permissions.util.EventListener;
 import com.youtube.hempfest.permissions.util.UtilityManager;
 import com.youtube.hempfest.permissions.util.layout.PermissionHook;
-import com.youtube.hempfest.permissions.util.layout.PermissionRefresh;
 import com.youtube.hempfest.permissions.util.vault.VaultPermissions;
 import com.youtube.hempfest.permissions.util.vault.VaultSetup;
 import java.lang.reflect.Field;
@@ -43,7 +42,8 @@ public class HempfestPermissions extends JavaPlugin {
 	//Instance
 	private static HempfestPermissions instance;
 	public VaultPermissions perms;
-	private final Logger log = Logger.getLogger("Minecraft");
+	public final PermissionHook listener = new PermissionHook();
+	private final Logger log = getLogger();
 	PluginManager pm = getServer().getPluginManager();
 	public HashMap<UUID, PermissionAttachment> playerPermissions = new HashMap<>();
 
@@ -67,21 +67,17 @@ public class HempfestPermissions extends JavaPlugin {
 		log.info("   888   888   888         888    .o  888      888   888   888  o.  )88b");
 		log.info("  o888o o888o o888o        `Y8bod8P' d888b    o888o o888o o888o 8''888P'");
 		log.info("▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬");
-		log.info(String.format("[%s] - Loading worlds: " + Arrays.toString(um.getWorlds()), getDescription().getName()));
+		log.info("- Loading worlds: " + Arrays.toString(um.getWorlds()));
 		Bukkit.getScheduler().scheduleSyncDelayedTask(this, um::generateWorlds, 5);
-		runSuperPerms();
 		refreshClients();
 	}
 
 	private void refreshClients() {
 		for (Player p : Bukkit.getOnlinePlayers()) {
-			UtilityManager um = new UtilityManager(p);
 			hookPermissions(p);
 		}
 	}
 
-
-	private final PermissionHook listener = new PermissionHook();
 	public void hookPermissions(Player p) {
 		PermissionAttachment attachment = p.addAttachment(HempfestPermissions.getInstance());
 		for (String perms : listener.playerPermissions(p, p.getWorld().getName())) {
@@ -104,11 +100,6 @@ public class HempfestPermissions extends JavaPlugin {
 		}
 		playerPermissions.clear();
 		um.playerStringMap.clear();
-	}
-
- 	private void runSuperPerms() {
-		PermissionRefresh syncd = new PermissionRefresh();
-		syncd.runTaskTimer(this, 1, 10L);
 	}
 	
 
@@ -135,7 +126,7 @@ public class HempfestPermissions extends JavaPlugin {
 	}
 
 	private void registerEvents() {
-		pm.registerEvents(new BukkitListener(), this);
+		pm.registerEvents(new EventListener(), this);
 
 	}
 

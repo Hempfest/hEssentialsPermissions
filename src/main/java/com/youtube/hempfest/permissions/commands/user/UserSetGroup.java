@@ -1,6 +1,7 @@
 package com.youtube.hempfest.permissions.commands.user;
 
 import com.youtube.hempfest.permissions.HempfestPermissions;
+import com.youtube.hempfest.permissions.util.events.PermissionUpdateEvent;
 import com.youtube.hempfest.permissions.util.yml.Config;
 import com.youtube.hempfest.permissions.util.yml.DataManager;
 import com.youtube.hempfest.permissions.util.UtilityManager;
@@ -76,6 +77,11 @@ public class UserSetGroup extends BukkitCommand {
                 sendMessage(commandSender, um.prefix + "&d&oUpdated user " + '"' + playerName + '"' + " to group " + '"' + groupName + '"' + " in world " + '"' + worldName + '"');
                 if (Bukkit.getOfflinePlayer(um.usernameToUUID(playerName)).isOnline()) {
                     sendMessage(Bukkit.getPlayer(playerName), um.prefix + "&e&oYou've been moved to rank &f&n" + groupName);
+                }
+                PermissionUpdateEvent event = new PermissionUpdateEvent();
+                Bukkit.getPluginManager().callEvent(event);
+                if (!event.isCancelled()) {
+                    event.query();
                 }
             }
 

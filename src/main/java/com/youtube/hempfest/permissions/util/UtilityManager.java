@@ -31,14 +31,11 @@ public class UtilityManager {
     }
 
     public boolean runningVault() {
-        if (Bukkit.getPluginManager().isPluginEnabled("Vault"))
-            return true;
-        return false;
+        return Bukkit.getPluginManager().isPluginEnabled("Vault");
     }
 
     public void generateWorlds() {
-        for (int j = 0; j < getWorlds().length; j++) {
-            String w = getWorlds()[j];
+        for (String w : getWorlds()) {
             Config toGenerate = Config.get("Groups", "worlds/" + w);
             Config usersFile = Config.get("Users", "worlds/" + w);
             if (!toGenerate.exists() || toGenerate.getConfig().getKeys(false).isEmpty()) {
@@ -83,6 +80,7 @@ public class UtilityManager {
                         dperm.add("minecraft.command.pardon");
                         dperm.add("minecraft.command.pardon-ip");
                         dinher.add("Default");
+                        dinher.add("Moderator");
                         dinher.add("Builder");
                     }
                     if (def.equals("Owner")) {

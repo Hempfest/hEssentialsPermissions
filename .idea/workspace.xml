@@ -9,10 +9,24 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="b42b60b2-d90f-47a1-ad21-5568c75e59af" name="Default Changelist" comment="">
+    <list default="true" id="b42b60b2-d90f-47a1-ad21-5568c75e59af" name="Default Changelist" comment="awdawd">
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/youtube/hempfest/permissions/util/events/GroupPermissionUpdateEvent.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/youtube/hempfest/permissions/util/events/PermissionUpdateEvent.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/youtube/hempfest/permissions/util/events/UserPermissionUpdateEvent.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/youtube/hempfest/permissions/util/events/misc/PermissionUpdateLog.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/youtube/hempfest/permissions/util/events/misc/PermissionUpdateType.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/youtube/hempfest/permissions/HempfestPermissions.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/youtube/hempfest/permissions/HempfestPermissions.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/youtube/hempfest/permissions/commands/group/GroupInheritanceAdd.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/youtube/hempfest/permissions/commands/group/GroupInheritanceAdd.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/youtube/hempfest/permissions/commands/group/GroupInheritanceRemove.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/youtube/hempfest/permissions/commands/group/GroupInheritanceRemove.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/youtube/hempfest/permissions/commands/group/GroupPermissionList.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/youtube/hempfest/permissions/commands/group/GroupPermissionList.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/youtube/hempfest/permissions/commands/user/UserSetGroup.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/youtube/hempfest/permissions/commands/user/UserSetGroup.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/youtube/hempfest/permissions/commands/user/UserSubGroupAdd.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/youtube/hempfest/permissions/commands/user/UserSubGroupAdd.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/youtube/hempfest/permissions/commands/user/UserSubGroupRemove.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/youtube/hempfest/permissions/commands/user/UserSubGroupRemove.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/youtube/hempfest/permissions/util/BukkitListener.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/youtube/hempfest/permissions/util/EventListener.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/youtube/hempfest/permissions/util/UtilityManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/youtube/hempfest/permissions/util/UtilityManager.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/youtube/hempfest/permissions/util/yml/Config.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/youtube/hempfest/permissions/util/yml/Config.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/youtube/hempfest/permissions/util/layout/PermissionHook.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/youtube/hempfest/permissions/util/layout/PermissionHook.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/youtube/hempfest/permissions/util/layout/PermissionRefresh.java" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -23,6 +37,7 @@
     <option name="RECENT_TEMPLATES">
       <list>
         <option value="Interface" />
+        <option value="Enum" />
         <option value="Class" />
       </list>
     </option>
@@ -46,18 +61,18 @@
   <component name="PropertiesComponent">
     <property name="AnalyzeApkAction.lastApkPath" value="$PROJECT_DIR$" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$/../hEssentialsClans" />
-    <property name="project.structure.last.edited" value="Artifacts" />
+    <property name="project.structure.last.edited" value="Modules" />
     <property name="project.structure.proportion" value="0.15" />
     <property name="project.structure.side.proportion" value="0.2" />
     <property name="run.code.analysis.last.selected.profile" value="pProject Default" />
   </component>
   <component name="RecentsManager">
     <key name="CopyClassDialog.RECENTS_KEY">
+      <recent name="com.youtube.hempfest.permissions.util.events" />
       <recent name="com.youtube.hempfest.permissions.util.yml" />
       <recent name="com.youtube.hempfest.permissions.util" />
       <recent name="com.youtube.hempfest.permissions.commands.user" />
       <recent name="com.youtube.hempfest.permissions.commands.group" />
-      <recent name="com.youtube.hempfest.permissions.commands" />
     </key>
   </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
@@ -69,13 +84,41 @@
       <option name="presentableId" value="Default" />
       <updated>1601467006161</updated>
     </task>
+    <task id="LOCAL-00001" summary="awdawd">
+      <created>1610952143928</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1610952143928</updated>
+    </task>
+    <option name="localTasksCounter" value="2" />
     <servers />
   </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="awdawd" />
+    <option name="LAST_COMMIT_MESSAGE" value="awdawd" />
+  </component>
   <component name="WindowStateProjectService">
-    <state x="1120" y="1742" key="#com.intellij.ide.util.MemberChooser" timestamp="1609668651801">
+    <state x="746" y="1534" key="#Project_Structure" timestamp="1610952133617">
       <screen x="306" y="1440" width="1920" height="1040" />
     </state>
-    <state x="1120" y="1742" key="#com.intellij.ide.util.MemberChooser/0.0.2560.1400/306.1440.1920.1040@306.1440.1920.1040" timestamp="1609668651801" />
+    <state x="746" y="1534" key="#Project_Structure/0.0.2560.1400/306.1440.1920.1040@306.1440.1920.1040" timestamp="1610952133617" />
+    <state x="1120" y="1742" key="#com.intellij.ide.util.MemberChooser" timestamp="1610959993659">
+      <screen x="306" y="1440" width="1920" height="1040" />
+    </state>
+    <state x="1120" y="1742" key="#com.intellij.ide.util.MemberChooser/0.0.2560.1400/306.1440.1920.1040@306.1440.1920.1040" timestamp="1610959993659" />
+    <state x="562" y="1440" key="#com.intellij.refactoring.rename.AutomaticRenamingDialog" timestamp="1610957802795">
+      <screen x="306" y="1440" width="1920" height="1040" />
+    </state>
+    <state x="562" y="1440" key="#com.intellij.refactoring.rename.AutomaticRenamingDialog/0.0.2560.1400/306.1440.1920.1040@306.1440.1920.1040" timestamp="1610957802795" />
+    <state x="996" y="1708" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog" timestamp="1610959218615">
+      <screen x="306" y="1440" width="1920" height="1040" />
+    </state>
+    <state x="996" y="1708" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog/0.0.2560.1400/306.1440.1920.1040@306.1440.1920.1040" timestamp="1610959218615" />
+    <state x="766" y="1443" key="CommitChangelistDialog2" timestamp="1610964305240">
+      <screen x="306" y="1440" width="1920" height="1040" />
+    </state>
+    <state x="766" y="1443" key="CommitChangelistDialog2/0.0.2560.1400/306.1440.1920.1040@306.1440.1920.1040" timestamp="1610964305240" />
     <state x="1101" y="1768" key="FileChooserDialogImpl" timestamp="1609673209808">
       <screen x="306" y="1440" width="1920" height="1040" />
     </state>
@@ -88,16 +131,13 @@
       <screen x="306" y="1440" width="1920" height="1040" />
     </state>
     <state x="898" y="1577" key="Github.UntrackedFilesDialog/0.0.2560.1400/306.1440.1920.1040@306.1440.1920.1040" timestamp="1610951410320" />
-  </component>
-  <component name="XDebuggerManager">
-    <breakpoint-manager>
-      <breakpoints>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/main/java/com/youtube/hempfest/permissions/util/BukkitListener.java</url>
-          <line>17</line>
-          <option name="timeStamp" value="1" />
-        </line-breakpoint>
-      </breakpoints>
-    </breakpoint-manager>
+    <state x="858" y="1689" key="Vcs.Push.Dialog.v2" timestamp="1610952145492">
+      <screen x="306" y="1440" width="1920" height="1040" />
+    </state>
+    <state x="858" y="1689" key="Vcs.Push.Dialog.v2/0.0.2560.1400/306.1440.1920.1040@306.1440.1920.1040" timestamp="1610952145492" />
+    <state x="929" y="1665" width="672" height="678" key="search.everywhere.popup" timestamp="1610955726280">
+      <screen x="306" y="1440" width="1920" height="1040" />
+    </state>
+    <state x="929" y="1665" width="672" height="678" key="search.everywhere.popup/0.0.2560.1400/306.1440.1920.1040@306.1440.1920.1040" timestamp="1610955726280" />
   </component>
 </project>

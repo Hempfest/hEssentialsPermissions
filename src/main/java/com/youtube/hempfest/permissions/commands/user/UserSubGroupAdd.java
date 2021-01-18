@@ -1,10 +1,12 @@
 package com.youtube.hempfest.permissions.commands.user;
 
 import com.youtube.hempfest.permissions.HempfestPermissions;
+import com.youtube.hempfest.permissions.util.events.PermissionUpdateEvent;
 import com.youtube.hempfest.permissions.util.yml.Config;
 import com.youtube.hempfest.permissions.util.yml.DataManager;
 import com.youtube.hempfest.permissions.util.UtilityManager;
 import com.youtube.hempfest.permissions.util.layout.PermissionHook;
+import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.command.defaults.BukkitCommand;
@@ -75,6 +77,11 @@ public class UserSubGroupAdd extends BukkitCommand {
                 users.saveConfig();
                 sendMessage(commandSender, um.prefix + "&a&oAdded sub-group " + '"' + groupName + '"' + " to player " + '"' + playerName + '"' + " inheritance list in world " + '"' + worldName + '"');
                 System.out.println(String.format("[%s] - Added sub-group inheritance " + '"' + groupName + '"' + " to player " + '"' + playerName + '"' + " inheritance list in world " + '"' + worldName + '"', HempfestPermissions.getInstance().getDescription().getName()));
+                PermissionUpdateEvent event = new PermissionUpdateEvent();
+                Bukkit.getPluginManager().callEvent(event);
+                if (!event.isCancelled()) {
+                    event.query();
+                }
                 return true;
             }
             return true;

@@ -1,10 +1,13 @@
 package com.youtube.hempfest.permissions.commands.group;
 
+import com.youtube.hempfest.hempcore.formatting.component.Text;
 import com.youtube.hempfest.permissions.HempfestPermissions;
 import com.youtube.hempfest.permissions.util.yml.Config;
 import com.youtube.hempfest.permissions.util.yml.DataManager;
 import com.youtube.hempfest.permissions.util.UtilityManager;
 import com.youtube.hempfest.permissions.util.layout.PermissionHook;
+import java.util.LinkedList;
+import net.md_5.bungee.api.chat.BaseComponent;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.World;
@@ -145,7 +148,12 @@ public class GroupPermissionList extends BukkitCommand {
             }
             List<String> inher = groups.getConfig().getStringList(groupname + ".inheritance");
             List<String> perms = groups.getConfig().getStringList(groupname + ".permissions");
-            sendMessage(p, um.prefix + "Permissions for group " + '"' + groupname + '"' + " in world " + '"' + worldName + '"' + ": " + perms.toString().replaceAll(",", "&b,&f"));
+            final List<BaseComponent> textComponents = new LinkedList<>();
+            textComponents.add(new Text().textHoverable(um.prefix + "Permissions for group " + '"' + groupname + '"' + " in world " + '"' + worldName + '"' + ": ", "", ""));
+            for (String perm : perms) {
+                textComponents.add(new Text().textRunnable("", perm, "&b,&f ", "&c&oClick to &bremove &e&o&n" + perm, "gremp " + groupname + " " + worldName + " " + perm));
+            }
+            p.spigot().sendMessage(textComponents.toArray(new BaseComponent[0]));
             if (!inher.isEmpty()) {
                 sendMessage(p, um.prefix + "&e&oGroup " + '"' + groupname + '"' + " also inherits permissions from group(s): &f&n" + inher.toString());
             }

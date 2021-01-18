@@ -1,6 +1,7 @@
 package com.youtube.hempfest.permissions.commands.group;
 
 import com.youtube.hempfest.permissions.HempfestPermissions;
+import com.youtube.hempfest.permissions.util.events.PermissionUpdateEvent;
 import com.youtube.hempfest.permissions.util.yml.Config;
 import com.youtube.hempfest.permissions.util.yml.DataManager;
 import com.youtube.hempfest.permissions.util.UtilityManager;
@@ -111,6 +112,11 @@ public class GroupInheritanceRemove extends BukkitCommand {
                 groups.getConfig().set(group + ".inheritance", inher);
                 groups.saveConfig();
                 sendMessage(commandSender, um.prefix + "&a&oYou just removed group-inheritance &f" + groupToRem + " &a&ofrom group &f" + '"' + group + '"' + " &a&oin world &f" + '"' + world + '"');
+                PermissionUpdateEvent event = new PermissionUpdateEvent();
+                Bukkit.getPluginManager().callEvent(event);
+                if (!event.isCancelled()) {
+                    event.query();
+                }
             }
             return true;
         }
@@ -173,6 +179,11 @@ public class GroupInheritanceRemove extends BukkitCommand {
             groups.getConfig().set(group + ".inheritance", inher);
             groups.saveConfig();
             sendMessage(p, um.prefix + "&a&oYou just removed group-inheritance &f" + groupToRem + " &a&ofrom group &f" + '"' + group + '"' + " &a&oin world &f" + '"' + world + '"');
+            PermissionUpdateEvent event = new PermissionUpdateEvent();
+            Bukkit.getPluginManager().callEvent(event);
+            if (!event.isCancelled()) {
+                event.query();
+            }
         }
 
 
