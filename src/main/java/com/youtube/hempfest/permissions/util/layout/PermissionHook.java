@@ -360,6 +360,14 @@ public class PermissionHook {
         return perms.toArray(new String[0]);
     }
 
+    public String[] groupDirectPermissions(String group, String world) {
+        DataManager dm = new DataManager();
+        Config groups = dm.getGroups(world);
+        FileConfiguration g = groups.getConfig();
+        List<String> perms = g.getStringList(group + ".permissions");
+        return perms.toArray(new String[0]);
+    }
+
     public String[] groupPermissions(String group, String world) {
         DataManager dm = new DataManager();
         Config groups = dm.getGroups(world);
