@@ -60,6 +60,15 @@ public class UserSubGroupAdd extends BukkitCommand {
             }
             return result;
         }
+        if (args.length == 3) {
+            arguments.clear();
+            arguments.addAll(Arrays.asList(listener.getAllGroups(p.getWorld().getName())));
+            for (String a : arguments) {
+                if (a.toLowerCase().startsWith(args[2].toLowerCase()))
+                    result.add(a);
+            }
+            return result;
+        }
         return null;
     }
 
