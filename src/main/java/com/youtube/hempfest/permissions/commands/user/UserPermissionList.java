@@ -153,7 +153,7 @@ public class UserPermissionList extends BukkitCommand {
             final List<BaseComponent> textComponents = new LinkedList<>();
             textComponents.add(new Text().textHoverable(um.prefix + "Permissions for user " + '"' + playerName + '"' + " in world " + '"' + worldName + '"' + ": ", "", ""));
             for (String perm : perms) {
-                textComponents.add(new Text().textRunnable("", perm, "&b,&f ", "&c&oClick to remove &e&o&n" + perm, "gremp " + playerName + " " + worldName + " " + perm));
+                textComponents.add(new Text().textRunnable("", perm, "&b,&f ", "&c&oClick to remove &e&o&n" + perm, "uremp " + playerName + " " + worldName + " " + perm));
             }
             p.spigot().sendMessage(textComponents.toArray(new BaseComponent[0]));
             if (!inher.isEmpty()) {
