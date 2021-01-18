@@ -83,11 +83,11 @@ public class GroupPermissionAdd extends BukkitCommand {
             }
 
             if (length == 3) {
-                String groupname = args[0];
+                String groupName = args[0];
                 String worldName = args[1];
                 String permission = args[2];
-                if (!Arrays.asList(listener.getAllGroups(worldName)).contains(groupname)) {
-                    sendMessage(commandSender, um.prefix + "&c&oA group by the name of " + '"' + groupname + '"' + " doesn't exist in world " + '"' + worldName + '"');
+                if (!Arrays.asList(listener.getAllGroups(worldName)).contains(groupName)) {
+                    sendMessage(commandSender, um.prefix + "&c&oA group by the name of " + '"' + groupName + '"' + " doesn't exist in world " + '"' + worldName + '"');
                     return true;
                 }
                 List<String> worlds = Arrays.asList(um.getWorlds());
@@ -95,23 +95,23 @@ public class GroupPermissionAdd extends BukkitCommand {
                     sendMessage(commandSender, um.prefix + "&c&oWorld " + '"' + worldName + '"' + " not found.");
                     return true;
                 }
-                List<String> permList = Arrays.asList(listener.groupPermissions(groupname, worldName));
+                List<String> permList = Arrays.asList(listener.groupPermissions(groupName, worldName));
                 if (permList.contains(permission)) {
-                    sendMessage(commandSender, um.prefix + "&c&oGroup " + '"' + groupname + '"' + " already has direct access to permission " + '"' + permission + '"' + " in world " + '"' + worldName + '"');
+                    sendMessage(commandSender, um.prefix + "&c&oGroup " + '"' + groupName + '"' + " already has direct access to permission " + '"' + permission + '"' + " in world " + '"' + worldName + '"');
                     return true;
                 }
-                listener.groupGive(groupname, worldName, permission);
-                sendMessage(commandSender, um.prefix + "&a&oYou just gave permission &f" + permission + " &a&oto group &f" + '"' + groupname + '"' + " &a&oin world &f" + '"' + worldName + '"');
+                listener.groupGive(groupName, worldName, permission);
+                sendMessage(commandSender, um.prefix + "&a&oYou just gave permission &f" + permission + " &a&oto group &f" + '"' + groupName + '"' + " &a&oin world &f" + '"' + worldName + '"');
                 return true;
             }
 
             if (length == 4) {
-                String groupname = args[0];
+                String groupName = args[0];
                 String worldName = args[1];
                 String permission = args[2];
                 String permission2 = args[3];
-                if (!Arrays.asList(listener.getAllGroups(worldName)).contains(groupname)) {
-                    sendMessage(commandSender, um.prefix + "&c&oA group by the name of " + '"' + groupname + '"' + " doesn't exist in world " + '"' + worldName + '"');
+                if (!Arrays.asList(listener.getAllGroups(worldName)).contains(groupName)) {
+                    sendMessage(commandSender, um.prefix + "&c&oA group by the name of " + '"' + groupName + '"' + " doesn't exist in world " + '"' + worldName + '"');
                     return true;
                 }
                 List<String> worlds = Arrays.asList(um.getWorlds());
@@ -120,19 +120,19 @@ public class GroupPermissionAdd extends BukkitCommand {
                     return true;
                 }
                 LinkedList<String> results = new LinkedList<>(Arrays.asList(permission, permission2));
-                String[] permList = listener.groupPermissions(groupname, worldName);
+                String[] permList = listener.groupPermissions(groupName, worldName);
                 for (String result : permList) {
                     if (result.equals(permission)) {
-                        sendMessage(commandSender, um.prefix + "&c&oGroup " + '"' + groupname + '"' + " already has direct access to permission " + '"' + result + '"' + " in world " + '"' + worldName + '"');
+                        sendMessage(commandSender, um.prefix + "&c&oGroup " + '"' + groupName + '"' + " already has direct access to permission " + '"' + result + '"' + " in world " + '"' + worldName + '"');
                         results.remove(permission);
                     }
                     if (result.equals(permission2)) {
-                        sendMessage(commandSender, um.prefix + "&c&oGroup " + '"' + groupname + '"' + " already has direct access to permission " + '"' + result + '"' + " in world " + '"' + worldName + '"');
+                        sendMessage(commandSender, um.prefix + "&c&oGroup " + '"' + groupName + '"' + " already has direct access to permission " + '"' + result + '"' + " in world " + '"' + worldName + '"');
                         results.remove(permission2);
                     }
                 }
-                listener.groupGive(groupname, worldName, results);
-                sendMessage(commandSender, um.prefix + "&d&oYou just gave permissions &f" + results.toString() + " &d&oto group &f" + '"' + groupname + '"' + " &d&oin world &f" + '"' + worldName + '"');
+                listener.groupGive(groupName, worldName, results);
+                sendMessage(commandSender, um.prefix + "&d&oYou just gave permissions &f" + results.toString() + " &d&oto group &f" + '"' + groupName + '"' + " &d&oin world &f" + '"' + worldName + '"');
                 return true;
             }
 

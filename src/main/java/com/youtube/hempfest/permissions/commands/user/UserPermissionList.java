@@ -149,6 +149,7 @@ public class UserPermissionList extends BukkitCommand {
                 return true;
             }
             List<String> inher = users.getConfig().getStringList( "User-List." + id.toString() + ".sub-groups");
+            inher.add(HempfestPermissions.getInstance().listener.getGroup(id, worldName));
             List<String> perms = users.getConfig().getStringList("User-List." + id.toString() + ".permissions");
             final List<BaseComponent> textComponents = new LinkedList<>();
             textComponents.add(new Text().textHoverable(um.prefix + "Permissions for user " + '"' + playerName + '"' + " in world " + '"' + worldName + '"' + ": ", "", ""));

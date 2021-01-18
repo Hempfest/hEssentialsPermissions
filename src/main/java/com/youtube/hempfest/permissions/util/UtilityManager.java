@@ -6,6 +6,7 @@ import com.youtube.hempfest.permissions.util.yml.DataManager;
 import java.io.File;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.UUID;
@@ -143,18 +144,15 @@ public class UtilityManager {
         List<String> dperm = new ArrayList<>();
         List<String> dinher = new ArrayList<>();
         if (inheritance != null) {
-            for (String in : inheritance) {
-                dinher.add(in);
-            }
+            Collections.addAll(dinher, inheritance);
         }
         FileConfiguration fc = toGenerate.getConfig();
         fc.set(group + ".permissions", dperm);
         fc.set(group + ".inheritance", dinher);
         fc.set(group + ".default", false);
-        fc.set(group + ".use-suffix", true);
         fc.set(group + ".prefix", "[&l" + group + "&r]");
         toGenerate.saveConfig();
-        System.out.println(String.format("[%s] - Generated new group " + '"' + group + '"' + " in world " + '"' + world + '"', HempfestPermissions.getInstance().getDescription().getName()));
+        HempfestPermissions.getInstance().getLogger().info("- Generated new group " + '"' + group + '"' + " in world " + '"' + world);
     }
 
     public void deleteGroup(String group, String world) {
@@ -162,11 +160,10 @@ public class UtilityManager {
         Config toGenerate = dm.getGroups(world);
         toGenerate.getConfig().set(group, null);
         toGenerate.saveConfig();
-        System.out.println(String.format("[%s] - Deleted group " + '"' + group + '"' + " from world " + '"' + world + '"', HempfestPermissions.getInstance().getDescription().getName()));
+        HempfestPermissions.getInstance().getLogger().info("[%s] - Deleted group " + '"' + group + '"' + " from world " + '"' + world + '"');
     }
 
     public void generateUserFile() {
-        int i = 0;
         UUID id = p.getUniqueId();
         for (String w : getWorlds()) {
             Config usersFile = new Config("Users", "worlds/" + w);
@@ -183,10 +180,7 @@ public class UtilityManager {
                 }
                 user.set("User-List." + id.toString() + ".sub-groups", nsg);
                 usersFile.saveConfig();
-                i++;
             }
-            if (i == 0)
-                break;
         }
     }
 
@@ -236,7 +230,7 @@ public class UtilityManager {
                 return g;
             }
         }
-        System.out.println(String.format("[%s] - No default group found. Please set a value to true amongst one of the groups.", HempfestPermissions.getInstance().getDescription().getName()));
+        HempfestPermissions.getInstance().getLogger().info("[%s] - No default group found. Please set a value to true amongst one of the groups.");
         return null;
     }
 
@@ -248,14 +242,9 @@ public class UtilityManager {
         return list.toArray(new String[0]);
     }
 
-    public List<String> getWorldContainer() {
+    public File getWorldContainer() {
         final File dir = new File(Config.class.getProtectionDomain().getCodeSource().getLocation().getPath().replaceAll("%20", " "));
-        File d = new File(dir.getParentFile().getPath(), HempfestPermissions.getInstance().getName() + "/worlds/");
-        List<String> array = new ArrayList<>();
-        for (File f : d.listFiles()) {
-            array.add(f.getName().replace(".yml", ""));
-        }
-        return array;
+        return new File(dir.getParentFile().getPath(), HempfestPermissions.getInstance().getName() + "/worlds/");
     }
 
     public void updateUsername(Player p) {
@@ -290,8 +279,7 @@ public class UtilityManager {
 
     public String usernameFromUUID(UUID id) {
         OfflinePlayer player = Bukkit.getOfflinePlayer(id);
-        if(player == null) return null;
-        return player.getName();
+        return player.getName() != null ? player.getName() : null;
     }
 
 }

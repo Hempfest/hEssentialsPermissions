@@ -8,6 +8,7 @@ import java.io.InputStream;
 import java.io.OutputStream;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.configuration.file.YamlConfiguration;
 
@@ -47,10 +48,6 @@ public class Config {
         return d;
     }
 
-    public String getSimpleDirectory() {
-        return (d == null) ? "" : d;
-    }
-
     public static Config get(final String n, final String d) {
         for (final Config c : Config.configs) {
             if (c.getName().equals(n) && c.getDirectory().equals(d)) {
@@ -65,7 +62,7 @@ public class Config {
 
     public static Config get(final String d) {
         for (final Config c : Config.configs) {
-            if (c.getSimpleDirectory().equals(d)) {
+            if (c.getDirectory().equals(d)) {
                 return c;
             }
         }
@@ -76,7 +73,7 @@ public class Config {
     }
 
     public boolean delete() {
-        Config.configs.removeIf(config -> config.getName().equals(getName()));
+        Config.configs.removeIf(config -> config.equals(this));
         return this.getFile().delete();
     }
 
@@ -149,5 +146,20 @@ public class Config {
         }
     }
 
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof Config)) return false;
+        Config config = (Config) o;
+        return n.equals(config.n) &&
+                d.equals(config.d) &&
+                Objects.equals(fc, config.fc) &&
+                Objects.equals(getFile(), config.getFile());
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(n, d);
+    }
 }
 

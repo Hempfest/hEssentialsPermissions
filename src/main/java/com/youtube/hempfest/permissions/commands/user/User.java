@@ -29,6 +29,8 @@ public class User extends BukkitCommand {
 		array.add(" ");
 		array.add("/uaddsg <playerName> <worldName> <subGroupName> - &eAdd a subgroup to a user in a specific world for them to inherit permissions from");
 		array.add(" ");
+		array.add("/ulistp <playerName> <worldName> - &eList all user permissions within a specified world.");
+		array.add(" ");
 		array.add("/uremsg <playerName> <worldName> <subGroupName> - &eRevoke a subgroup from a user in a specific world");
 		array.add(" ");
 		array.add("/uload - &eReload the " + '"' + "Users" + '"' + " file through-out all worlds.");
