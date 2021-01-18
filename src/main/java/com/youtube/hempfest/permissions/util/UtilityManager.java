@@ -1,7 +1,6 @@
 package com.youtube.hempfest.permissions.util;
 
 import com.youtube.hempfest.permissions.HempfestPermissions;
-import com.youtube.hempfest.permissions.util.layout.PermissionHook;
 import com.youtube.hempfest.permissions.util.yml.Config;
 import com.youtube.hempfest.permissions.util.yml.DataManager;
 import java.io.File;
@@ -15,12 +14,11 @@ import org.bukkit.OfflinePlayer;
 import org.bukkit.World;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.entity.Player;
-import org.bukkit.permissions.PermissionAttachment;
 
 public class UtilityManager {
     Player p;
 
-    public String prefix = "&7[&b&ohPermissions&7]&r ";
+    public String prefix = "&7[&bhPermissions&7]&r ";
 
     public HashMap<Player, String> playerStringMap = new HashMap<>();
 
