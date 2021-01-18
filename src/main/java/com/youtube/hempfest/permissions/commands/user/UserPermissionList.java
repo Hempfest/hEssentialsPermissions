@@ -72,12 +72,12 @@ public class UserPermissionList extends BukkitCommand {
         if (!(commandSender instanceof Player)) {
             int length = args.length;
             if (length == 0) {
-                sendMessage(commandSender, um.prefix + "&c&o/" + commandLabel + " <groupName> <worldName>");
+                sendMessage(commandSender, um.prefix + "&c&o/" + commandLabel + " <playerName> <worldName>");
                 return true;
             }
 
             if (length == 1) {
-                sendMessage(commandSender, um.prefix + "&c&o/" + commandLabel + " <groupName> <worldName>");
+                sendMessage(commandSender, um.prefix + "&c&o/" + commandLabel + " <playerName> <worldName>");
                 return true;
             }
 
@@ -124,12 +124,12 @@ public class UserPermissionList extends BukkitCommand {
             return true;
         }
         if (length == 0) {
-            sendMessage(p, um.prefix + "&c&o/" + commandLabel + " <groupName> <worldName>");
+            sendMessage(p, um.prefix + "&c&o/" + commandLabel + " <playerName> <worldName>");
             return true;
         }
 
         if (length == 1) {
-            sendMessage(p, um.prefix + "&c&o/" + commandLabel + " <groupName> <worldName>");
+            sendMessage(p, um.prefix + "&c&o/" + commandLabel + " <playerName> <worldName>");
             return true;
         }
 

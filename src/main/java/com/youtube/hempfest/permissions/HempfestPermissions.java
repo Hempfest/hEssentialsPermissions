@@ -13,6 +13,7 @@ import com.youtube.hempfest.permissions.commands.group.GroupPermissionRemove;
 import com.youtube.hempfest.permissions.commands.user.User;
 import com.youtube.hempfest.permissions.commands.user.UserLoad;
 import com.youtube.hempfest.permissions.commands.user.UserPermissionAdd;
+import com.youtube.hempfest.permissions.commands.user.UserPermissionList;
 import com.youtube.hempfest.permissions.commands.user.UserPermissionRemove;
 import com.youtube.hempfest.permissions.commands.user.UserSetGroup;
 import com.youtube.hempfest.permissions.commands.user.UserSubGroupAdd;
@@ -180,7 +181,7 @@ public class HempfestPermissions extends JavaPlugin {
 		registerCommand(new GroupDelete("groupdelete", "Base command for deleting groups.", "hpermissions.group.delete", "", aliases15));
 		ArrayList<String> aliases16 = new ArrayList<String>();
 		aliases7.addAll(Arrays.asList("ulp", "ulistp"));
-		registerCommand(new UserPermissionAdd("userlistp", "Base command for listing user permissions.", "hpermissions.user.list.permissions", "", aliases16));
+		registerCommand(new UserPermissionList("userlistp", "Base command for listing user permissions.", "hpermissions.user.list.permissions", "", aliases16));
 	}
 	
 
