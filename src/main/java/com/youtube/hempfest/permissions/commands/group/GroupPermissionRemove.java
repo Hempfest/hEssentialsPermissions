@@ -91,7 +91,7 @@ public class GroupPermissionRemove extends BukkitCommand {
                 }
                 List<String> permList = Arrays.asList(listener.groupPermissions(groupname, worldName));
                 if (!permList.contains(permission)) {
-                    sendMessage(commandSender, um.prefix + "&c&oThe group " + '"' + groupname + '"' + " already has no access to permission " + '"' + permission + '"' + " in world " + '"' + worldName + '"');
+                    sendMessage(commandSender, um.prefix + "&c&oThe group " + '"' + groupname + '"' + " already has no direct-access to permission " + '"' + permission + '"' + " in world " + '"' + worldName + '"');
                     return true;
                 }
                 List<String> worlds = Arrays.asList(um.getWorlds());
@@ -117,7 +117,7 @@ public class GroupPermissionRemove extends BukkitCommand {
                 List<String> permList = Arrays.asList(listener.groupDirectPermissions(groupname, worldName));
                 for (String result : results) {
                     if (!permList.contains(result)) {
-                        sendMessage(commandSender, um.prefix + "&c&oThe group " + '"' + groupname + '"' + " already has no access to permission " + '"' + result + '"' + " in world " + '"' + worldName + '"');
+                        sendMessage(commandSender, um.prefix + "&c&oThe group " + '"' + groupname + '"' + " already has no direct-access to permission " + '"' + result + '"' + " in world " + '"' + worldName + '"');
                         return true;
                     }
                 }
@@ -146,7 +146,7 @@ public class GroupPermissionRemove extends BukkitCommand {
                 List<String> permList = Arrays.asList(listener.groupDirectPermissions(groupname, worldName));
                 for (String result : results) {
                     if (!permList.contains(result)) {
-                        sendMessage(commandSender, um.prefix + "&c&oThe group " + '"' + groupname + '"' + " already has no access to permission " + '"' + result + '"' + " in world " + '"' + worldName + '"');
+                        sendMessage(commandSender, um.prefix + "&c&oThe group " + '"' + groupname + '"' + " already has no direct-access to permission " + '"' + result + '"' + " in world " + '"' + worldName + '"');
                         return true;
                     }
                 }
@@ -201,9 +201,9 @@ public class GroupPermissionRemove extends BukkitCommand {
                 sendMessage(p, um.prefix + "&c&oA group by the name of " + '"' + groupname + '"' + " doesn't exist in world " + '"' + worldName + '"');
                 return true;
             }
-            List<String> permList = Arrays.asList(listener.groupPermissions(groupname, worldName));
+            List<String> permList = Arrays.asList(listener.groupDirectPermissions(groupname, worldName));
             if (!permList.contains(permission)) {
-                sendMessage(p, um.prefix + "&c&oThe group " + '"' + groupname + '"' + " already has no access to permission " + '"' + permission + '"' + " in world " + '"' + worldName + '"');
+                sendMessage(p, um.prefix + "&c&oThe group " + '"' + groupname + '"' + " already has no direct-access to permission " + '"' + permission + '"' + " in world " + '"' + worldName + '"');
                 return true;
             }
             List<String> worlds = Arrays.asList(um.getWorlds());
@@ -226,10 +226,10 @@ public class GroupPermissionRemove extends BukkitCommand {
                 return true;
             }
             List<String> results = Arrays.asList(permission, permission2);
-            List<String> permList = Arrays.asList(listener.groupPermissions(groupname, worldName));
+            List<String> permList = Arrays.asList(listener.groupDirectPermissions(groupname, worldName));
             for (String result : results) {
                 if (!permList.contains(result)) {
-                    sendMessage(p, um.prefix + "&c&oThe group " + '"' + groupname + '"' + " already has no access to permission " + '"' + result + '"' + " in world " + '"' + worldName + '"');
+                    sendMessage(p, um.prefix + "&c&oThe group " + '"' + groupname + '"' + " already has no direct-access to permission " + '"' + result + '"' + " in world " + '"' + worldName + '"');
                     return true;
                 }
             }
@@ -255,10 +255,10 @@ public class GroupPermissionRemove extends BukkitCommand {
                 return true;
             }
             List<String> results = Arrays.asList(permission, permission2, permission3);
-            List<String> permList = Arrays.asList(listener.groupPermissions(groupname, worldName));
+            List<String> permList = Arrays.asList(listener.groupDirectPermissions(groupname, worldName));
             for (String result : results) {
                 if (!permList.contains(result)) {
-                    sendMessage(p, um.prefix + "&c&oThe group " + '"' + groupname + '"' + " already has no access to permission " + '"' + result + '"' + " in world " + '"' + worldName + '"');
+                    sendMessage(p, um.prefix + "&c&oThe group " + '"' + groupname + '"' + " already has no direct-access to permission " + '"' + result + '"' + " in world " + '"' + worldName + '"');
                     return true;
                 }
             }
