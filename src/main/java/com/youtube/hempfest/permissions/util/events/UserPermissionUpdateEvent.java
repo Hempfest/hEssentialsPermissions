@@ -12,8 +12,6 @@ public class UserPermissionUpdateEvent extends PermissionUpdateEvent {
 
 	private static final HandlerList handlers = new HandlerList();
 
-	private boolean cancelled;
-
 	private boolean logPrinting;
 
 	private final String uuid;
@@ -93,14 +91,4 @@ public class UserPermissionUpdateEvent extends PermissionUpdateEvent {
 		return handlers;
 	}
 
-
-	@Override
-	public boolean isCancelled() {
-		return cancelled;
-	}
-
-	@Override
-	public void setCancelled(boolean b) {
-		this.cancelled = b;
-	}
 }

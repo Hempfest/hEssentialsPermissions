@@ -10,7 +10,6 @@ public class GroupPermissionUpdateEvent extends UserPermissionUpdateEvent {
 	private final String group;
 	private final String world;
 	private static final HandlerList handlers = new HandlerList();
-	private boolean cancelled;
 	private PermissionUpdateLog log;
 
 	public GroupPermissionUpdateEvent(PermissionUpdateType type, String group, String world, String... permissions) {
@@ -44,16 +43,6 @@ public class GroupPermissionUpdateEvent extends UserPermissionUpdateEvent {
 
 	public static HandlerList getHandlerList() {
 		return handlers;
-	}
-
-	@Override
-	public boolean isCancelled() {
-		return cancelled;
-	}
-
-	@Override
-	public void setCancelled(boolean b) {
-		this.cancelled = b;
 	}
 
 }
