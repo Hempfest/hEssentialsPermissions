@@ -8,6 +8,7 @@ import com.youtube.hempfest.permissions.util.UtilityManager;
 import com.youtube.hempfest.permissions.util.layout.PermissionHook;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
+import org.bukkit.World;
 import org.bukkit.command.CommandSender;
 import org.bukkit.command.defaults.BukkitCommand;
 import org.bukkit.entity.Player;
@@ -30,6 +31,36 @@ public class UserSubGroupAdd extends BukkitCommand {
 
     private String notPlayer() {
         return String.format("[%s] - You aren't a player..", HempfestPermissions.getInstance().getDescription().getName());
+    }
+
+    private final List<String> arguments = new ArrayList<String>();
+
+    @Override
+    public List<String> tabComplete(CommandSender sender, String alias, String[] args) throws IllegalArgumentException {
+        PermissionHook listener = new PermissionHook();
+        Player p = (Player) sender;
+        List<String> result = new ArrayList<>();
+        if (args.length == 1) {
+            arguments.clear();
+            arguments.addAll(Arrays.asList(listener.getAllUserNames(p.getWorld().getName())));
+            for (String a : arguments) {
+                if (a.toLowerCase().startsWith(args[0].toLowerCase()))
+                    result.add(a);
+            }
+            return result;
+        }
+        if (args.length == 2) {
+            arguments.clear();
+            for (World w : Bukkit.getWorlds()) {
+                arguments.add(w.getName());
+            }
+            for (String a : arguments) {
+                if (a.toLowerCase().startsWith(args[1].toLowerCase()))
+                    result.add(a);
+            }
+            return result;
+        }
+        return null;
     }
 
     @Override
