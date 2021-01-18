@@ -43,13 +43,17 @@ public class Config {
         return (n == null) ? "" : n;
     }
 
+    public String getDirectory() {
+        return d;
+    }
+
     public String getSimpleDirectory() {
         return (d == null) ? "" : d;
     }
 
     public static Config get(final String n, final String d) {
         for (final Config c : Config.configs) {
-            if (c.getName().equals(n)) {
+            if (c.getName().equals(n) && c.getDirectory().equals(d)) {
                 return c;
             }
         }

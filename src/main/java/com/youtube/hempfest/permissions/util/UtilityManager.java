@@ -39,8 +39,8 @@ public class UtilityManager {
     public void generateWorlds() {
         for (int j = 0; j < getWorlds().length; j++) {
             String w = getWorlds()[j];
-            Config toGenerate = new Config("Groups", "worlds/" + w);
-            Config usersFile = new Config("Users", "worlds/" + w);
+            Config toGenerate = Config.get("Groups", "worlds/" + w);
+            Config usersFile = Config.get("Users", "worlds/" + w);
             if (!toGenerate.exists() || toGenerate.getConfig().getKeys(false).isEmpty()) {
                 FileConfiguration world = toGenerate.getConfig();
                 for (String def : getDefaultRanks()) {
