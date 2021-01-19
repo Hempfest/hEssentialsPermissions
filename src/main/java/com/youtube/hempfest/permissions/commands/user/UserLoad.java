@@ -37,6 +37,7 @@ public class UserLoad extends BukkitCommand {
             if (length == 0) {
                 sendMessage(commandSender, um.prefix + "&c&o/" + commandLabel + " <worldName>");
                 DataManager dm = new DataManager();
+                Config.get("Config", null).reload();
                 for (String world : um.getWorlds()) {
                     Config users = dm.getUsers(world);
                     users.reload();

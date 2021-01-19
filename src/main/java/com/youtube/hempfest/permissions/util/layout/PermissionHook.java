@@ -36,30 +36,33 @@ public class PermissionHook {
     }
 
     public String[] getAllGroups(String world) {
+        if (Config.get("Config", null).getBoolean("global.ignore-world-container")) {
+            return getAllGroups();
+        }
         DataManager dm = new DataManager();
-        List<String> array = new ArrayList<>();
-            Config w = dm.getGroups(world);
+        Config w = dm.getGroups(world);
             FileConfiguration fc = w.getConfig();
-            for (String group : fc.getKeys(false)) {
-                array.add(group);
-            }
+        List<String> array = new ArrayList<>(fc.getKeys(false));
         return array.toArray(new String[0]);
     }
 
     public String[] getAllUserIDs(String world) {
         DataManager dm = new DataManager();
-        List<String> array = new ArrayList<>();
+        if (Config.get("Config", null).getBoolean("global.ignore-world-container")) {
+            world = Config.get("Config", null).getConfig().getString("global.world");
+        }
         Config w = dm.getUsers(world);
         FileConfiguration fc = w.getConfig();
-        for (String user : fc.getConfigurationSection("User-List").getKeys(false)) {
-            array.add(user);
-        }
+        List<String> array = new ArrayList<>(fc.getConfigurationSection("User-List").getKeys(false));
         return array.toArray(new String[0]);
     }
 
     public String[] getAllUserNames(String world) {
         DataManager dm = new DataManager();
         List<String> array = new ArrayList<>();
+        if (Config.get("Config", null).getBoolean("global.ignore-world-container")) {
+            world = Config.get("Config", null).getConfig().getString("global.world");
+        }
         Config w = dm.getUsers(world);
         FileConfiguration fc = w.getConfig();
         for (String user : fc.getConfigurationSection("User-List").getKeys(false)) {
@@ -71,12 +74,18 @@ public class PermissionHook {
    
     public String getGroup(OfflinePlayer player, String world) {
         DataManager dm = new DataManager();
+        if (Config.get("Config", null).getBoolean("global.ignore-world-container")) {
+            world = Config.get("Config", null).getConfig().getString("global.world");
+        }
         Config users = dm.getUsers(world);
         return users.getConfig().getString("User-List." + player.getUniqueId().toString() + ".group");
     }
 
     public String getGroup(UUID playerID, String world) {
         DataManager dm = new DataManager();
+        if (Config.get("Config", null).getBoolean("global.ignore-world-container")) {
+            world = Config.get("Config", null).getConfig().getString("global.world");
+        }
         Config users = dm.getUsers(world);
         return users.getConfig().getString("User-List." + playerID.toString() + ".group");
     }
@@ -84,6 +93,9 @@ public class PermissionHook {
    
     public String[] getGroups(OfflinePlayer player, String world) {
         DataManager dm = new DataManager();
+        if (Config.get("Config", null).getBoolean("global.ignore-world-container")) {
+            world = Config.get("Config", null).getConfig().getString("global.world");
+        }
         Config users = dm.getUsers(world);
         List<String> groups = new ArrayList<>(users.getConfig().getStringList("User-List." + player.getUniqueId().toString() + ".sub-groups"));
         groups.add(getGroup(player, world));
@@ -92,15 +104,15 @@ public class PermissionHook {
 
    
     public boolean playerInGroup(OfflinePlayer player, String world, String group) {
-        if (getGroup(player, world).equals(group)) {
-            return true;
-        }
-        return false;
+        return getGroup(player, world).equals(group);
     }
 
    
     public boolean playerGiveGroup(OfflinePlayer player, String world, String group) {
         DataManager dm = new DataManager();
+        if (Config.get("Config", null).getBoolean("global.ignore-world-container")) {
+            world = Config.get("Config", null).getConfig().getString("global.world");
+        }
         Config users = dm.getUsers(world);
         FileConfiguration u = users.getConfig();
         List<String> groups = new ArrayList<>(Arrays.asList(getGroups(player, world)));
@@ -119,6 +131,9 @@ public class PermissionHook {
    
     public boolean playerTakeGroup(OfflinePlayer player, String world, String group) {
         DataManager dm = new DataManager();
+        if (Config.get("Config", null).getBoolean("global.ignore-world-container")) {
+            world = Config.get("Config", null).getConfig().getString("global.world");
+        }
         Config users = dm.getUsers(world);
         FileConfiguration u = users.getConfig();
         List<String> groups = new ArrayList<>(Arrays.asList(getGroups(player, world)));
@@ -137,6 +152,9 @@ public class PermissionHook {
    
     public boolean playerHas(OfflinePlayer player, String world, String permission) {
         DataManager dm = new DataManager();
+        if (Config.get("Config", null).getBoolean("global.ignore-world-container")) {
+            world = Config.get("Config", null).getConfig().getString("global.world");
+        }
         Config users = dm.getUsers(world);
         FileConfiguration u = users.getConfig();
         if (u.getStringList("User-List." + player.getUniqueId().toString() + ".permissions").contains(permission)) {
@@ -155,6 +173,9 @@ public class PermissionHook {
    
     public boolean groupHas(String group, String world, String permission) {
         DataManager dm = new DataManager();
+        if (Config.get("Config", null).getBoolean("global.ignore-world-container")) {
+            world = Config.get("Config", null).getConfig().getString("global.world");
+        }
         Config groups = dm.getGroups(world);
         FileConfiguration g = groups.getConfig();
         if (g.getStringList(group + ".permissions").contains(permission)) {
@@ -166,6 +187,9 @@ public class PermissionHook {
    
     public boolean groupGive(String group, String world, String permission) {
         DataManager dm = new DataManager();
+        if (Config.get("Config", null).getBoolean("global.ignore-world-container")) {
+            world = Config.get("Config", null).getConfig().getString("global.world");
+        }
         Config groups = dm.getGroups(world);
         FileConfiguration g = groups.getConfig();
         List<String> perms = new ArrayList<>(g.getStringList(group + ".permissions"));
@@ -183,6 +207,9 @@ public class PermissionHook {
 
     public boolean groupGive(String group, String world, List<String> permission) {
         DataManager dm = new DataManager();
+        if (Config.get("Config", null).getBoolean("global.ignore-world-container")) {
+            world = Config.get("Config", null).getConfig().getString("global.world");
+        }
         Config groups = dm.getGroups(world);
         FileConfiguration g = groups.getConfig();
         List<String> perms = new ArrayList<>(g.getStringList(group + ".permissions"));
@@ -203,6 +230,9 @@ public class PermissionHook {
    
     public boolean groupTake(String group, String world, String permission) {
         DataManager dm = new DataManager();
+        if (Config.get("Config", null).getBoolean("global.ignore-world-container")) {
+            world = Config.get("Config", null).getConfig().getString("global.world");
+        }
         Config groups = dm.getGroups(world);
         FileConfiguration g = groups.getConfig();
         List<String> perms = new ArrayList<>(g.getStringList(group + ".permissions"));
@@ -220,6 +250,9 @@ public class PermissionHook {
 
     public boolean groupTake(String group, String world, List<String> permission) {
         DataManager dm = new DataManager();
+        if (Config.get("Config", null).getBoolean("global.ignore-world-container")) {
+            world = Config.get("Config", null).getConfig().getString("global.world");
+        }
         Config groups = dm.getGroups(world);
         FileConfiguration g = groups.getConfig();
         List<String> perms = new ArrayList<>(g.getStringList(group + ".permissions"));
@@ -240,6 +273,9 @@ public class PermissionHook {
    
     public boolean playerGive(OfflinePlayer player, String world, String permission) {
         DataManager dm = new DataManager();
+        if (Config.get("Config", null).getBoolean("global.ignore-world-container")) {
+            world = Config.get("Config", null).getConfig().getString("global.world");
+        }
         Config users = dm.getUsers(world);
         FileConfiguration u = users.getConfig();
         List<String> perms = u.getStringList("User-List." + player.getUniqueId().toString() + ".permissions");
@@ -258,6 +294,9 @@ public class PermissionHook {
    
     public boolean playerGive(OfflinePlayer player, String world, List<String> permissions) {
         DataManager dm = new DataManager();
+        if (Config.get("Config", null).getBoolean("global.ignore-world-container")) {
+            world = Config.get("Config", null).getConfig().getString("global.world");
+        }
         Config users = dm.getUsers(world);
         FileConfiguration u = users.getConfig();
         List<String> perms = u.getStringList("User-List." + player.getUniqueId().toString() + ".permissions");
@@ -278,6 +317,9 @@ public class PermissionHook {
    
     public boolean playerTake(OfflinePlayer player, String world, String permission) {
         DataManager dm = new DataManager();
+        if (Config.get("Config", null).getBoolean("global.ignore-world-container")) {
+            world = Config.get("Config", null).getConfig().getString("global.world");
+        }
         Config users = dm.getUsers(world);
         FileConfiguration u = users.getConfig();
         List<String> perms = u.getStringList("User-List." + player.getUniqueId().toString() + ".permissions");
@@ -296,6 +338,9 @@ public class PermissionHook {
    
     public boolean playerTake(OfflinePlayer player, String world, List<String> permissions) {
         DataManager dm = new DataManager();
+        if (Config.get("Config", null).getBoolean("global.ignore-world-container")) {
+            world = Config.get("Config", null).getConfig().getString("global.world");
+        }
         Config users = dm.getUsers(world);
         FileConfiguration u = users.getConfig();
         List<String> perms = u.getStringList("User-List." + player.getUniqueId().toString() + ".permissions");
@@ -316,6 +361,9 @@ public class PermissionHook {
    
     public String[] playerPermissions(OfflinePlayer player, String world) {
         DataManager dm = new DataManager();
+        if (Config.get("Config", null).getBoolean("global.ignore-world-container")) {
+            world = Config.get("Config", null).getConfig().getString("global.world");
+        }
         Config users = dm.getUsers(world);
         FileConfiguration u = users.getConfig();
         List<String> perms = u.getStringList("User-List." + player.getUniqueId().toString() + ".permissions");
@@ -335,6 +383,9 @@ public class PermissionHook {
 
     public String[] playerPermissions(UUID uuid, String world) {
         DataManager dm = new DataManager();
+        if (Config.get("Config", null).getBoolean("global.ignore-world-container")) {
+            world = Config.get("Config", null).getConfig().getString("global.world");
+        }
         Config users = dm.getUsers(world);
         FileConfiguration u = users.getConfig();
         List<String> perms = u.getStringList("User-List." + uuid.toString() + ".permissions");
@@ -354,6 +405,9 @@ public class PermissionHook {
 
     public String[] playerDirectPermissions(UUID uuid, String world) {
         DataManager dm = new DataManager();
+        if (Config.get("Config", null).getBoolean("global.ignore-world-container")) {
+            world = Config.get("Config", null).getConfig().getString("global.world");
+        }
         Config users = dm.getUsers(world);
         FileConfiguration u = users.getConfig();
         List<String> perms = u.getStringList("User-List." + uuid.toString() + ".permissions");
@@ -362,6 +416,9 @@ public class PermissionHook {
 
     public String[] groupDirectPermissions(String group, String world) {
         DataManager dm = new DataManager();
+        if (Config.get("Config", null).getBoolean("global.ignore-world-container")) {
+            world = Config.get("Config", null).getConfig().getString("global.world");
+        }
         Config groups = dm.getGroups(world);
         FileConfiguration g = groups.getConfig();
         List<String> perms = g.getStringList(group + ".permissions");
@@ -370,6 +427,9 @@ public class PermissionHook {
 
     public String[] groupPermissions(String group, String world) {
         DataManager dm = new DataManager();
+        if (Config.get("Config", null).getBoolean("global.ignore-world-container")) {
+            world = Config.get("Config", null).getConfig().getString("global.world");
+        }
         Config groups = dm.getGroups(world);
         FileConfiguration g = groups.getConfig();
         List<String> perms = g.getStringList(group + ".permissions");

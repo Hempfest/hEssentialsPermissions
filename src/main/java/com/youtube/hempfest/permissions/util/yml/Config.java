@@ -109,6 +109,10 @@ public class Config {
         return this.fc;
     }
 
+    public boolean getBoolean(String path) {
+        return getConfig().getBoolean(path);
+    }
+
     public File getDataFolder() {
         final File dir = new File(Config.class.getProtectionDomain().getCodeSource().getLocation().getPath().replaceAll("%20", " "));
         File d;

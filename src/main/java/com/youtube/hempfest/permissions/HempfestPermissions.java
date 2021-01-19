@@ -55,6 +55,7 @@ public class HempfestPermissions extends JavaPlugin {
 		registerCommands();
 		registerEvents();
 		UtilityManager um = new UtilityManager();
+		um.generateConfig();
 		if (um.runningVault()) {
 			this.perms = new VaultPermissions();
 			VaultSetup listener = new VaultSetup(this);

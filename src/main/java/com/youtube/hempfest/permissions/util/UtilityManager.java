@@ -4,6 +4,7 @@ import com.youtube.hempfest.permissions.HempfestPermissions;
 import com.youtube.hempfest.permissions.util.yml.Config;
 import com.youtube.hempfest.permissions.util.yml.DataManager;
 import java.io.File;
+import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
@@ -31,6 +32,14 @@ public class UtilityManager {
 
     public boolean runningVault() {
         return Bukkit.getPluginManager().isPluginEnabled("Vault");
+    }
+
+    public void generateConfig() {
+        Config main = Config.get("Config", null);
+        if (!main.exists()) {
+            InputStream is = HempfestPermissions.getInstance().getResource("Config.yml");
+            Config.copy(is, main.getFile());
+        }
     }
 
     public void generateWorlds() {
