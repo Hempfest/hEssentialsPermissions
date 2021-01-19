@@ -9,9 +9,7 @@ import org.bukkit.event.EventPriority;
 import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerChangedWorldEvent;
 import org.bukkit.event.player.PlayerJoinEvent;
-import org.bukkit.event.player.PlayerPortalEvent;
 import org.bukkit.event.player.PlayerQuitEvent;
-import org.bukkit.event.player.PlayerTeleportEvent;
 
 public class EventListener implements Listener {
 
@@ -37,11 +35,6 @@ public class EventListener implements Listener {
                 event.query();
             }
         }
-
-    @EventHandler
-    public void logActions(PermissionUpdateEvent e) {
-        e.setLogPrinting(true);
-    }
 
 
 }
