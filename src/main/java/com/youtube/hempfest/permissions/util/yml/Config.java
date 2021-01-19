@@ -50,6 +50,11 @@ public class Config {
 
     public static Config get(final String n, final String d) {
         for (final Config c : Config.configs) {
+            if (d == null) {
+                if (c.getName().equals(n) && c.getDirectory() == null) {
+                    return c;
+                }
+            }
             if (c.getName().equals(n) && c.getDirectory().equals(d)) {
                 return c;
             }
