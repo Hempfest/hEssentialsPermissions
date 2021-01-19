@@ -94,7 +94,7 @@ public class HempfestPermissions extends JavaPlugin {
 	}
 
 	public void onDisable() {
-		log.info(String.format("[%s] - Goodbye friends...", getDescription().getName()));
+		log.info("- Goodbye friends...");
 		UtilityManager um = new UtilityManager();
 		if (um.runningVault()) {
 			VaultSetup listener = new VaultSetup(this);
