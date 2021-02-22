@@ -1,6 +1,6 @@
 package com.youtube.hempfest.permissions.commands.user;
 
-import com.youtube.hempfest.hempcore.formatting.component.Text;
+import com.github.sanctum.labyrinth.formatting.component.Text;
 import com.youtube.hempfest.permissions.HempfestPermissions;
 import com.youtube.hempfest.permissions.util.UtilityManager;
 import com.youtube.hempfest.permissions.util.layout.PermissionHook;

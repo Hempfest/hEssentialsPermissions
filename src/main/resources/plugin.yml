@@ -1,7 +1,8 @@
 name: hPermissions
-version: 1.0.2
+version: 2.0.0
 author: Hempfest
 api-version: 1.13
-soft-depend: [Vault]
+depend: [ Labyrinth ]
+soft-depend: [ Vault ]
 description: A SuperPerms and Vault compatible permissions system.
 main: com.youtube.hempfest.permissions.HempfestPermissions

@@ -1,6 +1,6 @@
 package com.youtube.hempfest.permissions.commands.group;
 
-import com.youtube.hempfest.hempcore.formatting.component.Text;
+import com.github.sanctum.labyrinth.formatting.component.Text;
 import com.youtube.hempfest.permissions.HempfestPermissions;
 import com.youtube.hempfest.permissions.util.yml.Config;
 import com.youtube.hempfest.permissions.util.yml.DataManager;

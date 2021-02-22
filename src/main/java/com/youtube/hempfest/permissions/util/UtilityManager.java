@@ -35,7 +35,7 @@ public class UtilityManager {
     }
 
     public void generateConfig() {
-        Config main = Config.get("Config", null);
+        Config main = Config.get("Config", "data");
         if (!main.exists()) {
             InputStream is = HempfestPermissions.getInstance().getResource("Config.yml");
             Config.copy(is, main.getFile());

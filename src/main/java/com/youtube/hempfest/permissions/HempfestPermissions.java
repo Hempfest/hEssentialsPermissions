@@ -20,6 +20,7 @@ import com.youtube.hempfest.permissions.commands.user.UserSubGroupAdd;
 import com.youtube.hempfest.permissions.commands.user.UserSubGroupRemove;
 import com.youtube.hempfest.permissions.util.EventListener;
 import com.youtube.hempfest.permissions.util.UtilityManager;
+import com.youtube.hempfest.permissions.util.layout.PermissionBase;
 import com.youtube.hempfest.permissions.util.layout.PermissionHook;
 import com.youtube.hempfest.permissions.util.vault.VaultPermissions;
 import com.youtube.hempfest.permissions.util.vault.VaultSetup;
@@ -77,21 +78,8 @@ public class HempfestPermissions extends JavaPlugin {
 
 	private void refreshClients() {
 		for (Player p : Bukkit.getOnlinePlayers()) {
-			hookPermissions(p);
+			inject(p);
 		}
-	}
-
-	public void hookPermissions(Player p) {
-		PermissionAttachment attachment = p.addAttachment(HempfestPermissions.getInstance());
-		for (String perms : listener.playerPermissions(p, p.getWorld().getName())) {
-			attachment.setPermission(perms, true);
-		}
-		String world = p.getWorld().getName();
-		for (String perm : listener.groupPermissions(listener.getGroup(p, world), world)) {
-			attachment.setPermission(perm, true);
-		}
-		p.updateCommands();
-		HempfestPermissions.getInstance().playerPermissions.put(p.getUniqueId(), attachment);
 	}
 
 	public void onDisable() {
@@ -104,7 +92,22 @@ public class HempfestPermissions extends JavaPlugin {
 		playerPermissions.clear();
 		um.playerStringMap.clear();
 	}
-	
+
+	public void inject(Player p) {
+		Field permissibleBase;
+		try {
+			permissibleBase = p.getClass().getSuperclass().getDeclaredField("perm");
+		} catch (NoSuchFieldException noSuchFieldException) {
+			throw new IllegalStateException("Unable to find field! Library changes detected.", noSuchFieldException);
+		}
+		permissibleBase.setAccessible(true);
+		try {
+			permissibleBase.set(p, new PermissionBase(p));
+		} catch (IllegalAccessException illegalAccessException) {
+			throw new IllegalStateException("Unable to access field! Library changes detected.", illegalAccessException);
+		}
+		p.updateCommands();
+	}
 
 	public static HempfestPermissions getInstance() {
 		return instance;
@@ -169,6 +172,6 @@ public class HempfestPermissions extends JavaPlugin {
 		ArrayList<String> aliases16 = new ArrayList<>(Arrays.asList("ulp", "ulistp"));
 		registerCommand(new UserPermissionList("userlistp", "Base command for listing user permissions.", "hpermissions.user.list.permissions", "", aliases16));
 	}
-	
+
 
 }

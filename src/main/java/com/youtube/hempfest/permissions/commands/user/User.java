@@ -1,9 +1,8 @@
 package com.youtube.hempfest.permissions.commands.user;
 
-import com.youtube.hempfest.hempcore.formatting.string.PaginatedAssortment;
+import com.github.sanctum.labyrinth.formatting.string.PaginatedAssortment;
 import com.youtube.hempfest.permissions.util.UtilityManager;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 import org.bukkit.ChatColor;

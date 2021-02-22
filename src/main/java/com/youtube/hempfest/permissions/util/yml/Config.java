@@ -50,19 +50,18 @@ public class Config {
 
     public static Config get(final String n, final String d) {
         for (final Config c : Config.configs) {
-            if (d == null) {
-                if (c.getName().equals(n) && c.getDirectory() == null) {
-                    return c;
-                }
-            }
-            if (c.getName().equals(n) && c.getDirectory().equals(d)) {
+            if (c.getName().equals(n) && (c.getDirectory() != null && c.getDirectory().equals(d))) {
                 return c;
             }
         }
-        if (!n.isEmpty()) {
+        if (n != null && !n.isEmpty()) {
             return new Config(n, d);
         }
         return null;
+    }
+
+    public void flush() {
+        Config.configs.remove(this);
     }
 
     public static Config get(final String d) {

@@ -37,7 +37,7 @@ public class GroupLoad extends BukkitCommand {
             if (length == 0) {
                 sendMessage(commandSender, um.prefix + "&c&o/" + commandLabel + " <worldName>");
                 DataManager dm = new DataManager();
-                Config.get("Config", null).reload();
+                Config.get("Config", "data").reload();
                 for (String world : um.getWorlds()) {
                     Config groups = dm.getGroups(world);
                     groups.reload();
