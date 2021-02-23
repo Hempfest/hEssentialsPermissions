@@ -22,7 +22,7 @@ public class UtilityManager {
 
     public String prefix = "&7[&bhPermissions&7]&r ";
 
-    public HashMap<Player, String> playerStringMap = new HashMap<>();
+    public HashMap<Player, List<String>> userPermissions = new HashMap<>();
 
     public UtilityManager() {}
 

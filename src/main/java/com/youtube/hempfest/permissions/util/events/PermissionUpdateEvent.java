@@ -1,5 +1,7 @@
 package com.youtube.hempfest.permissions.util.events;
 
+import com.youtube.hempfest.permissions.HempfestPermissions;
+import java.util.Arrays;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 import org.bukkit.event.Cancellable;
@@ -14,11 +16,13 @@ public class PermissionUpdateEvent extends Event implements Cancellable {
 
 	public void query() {
 		for (Player p : Bukkit.getOnlinePlayers()) {
+			HempfestPermissions.getInstance().um.userPermissions.put(p, Arrays.asList(HempfestPermissions.getInstance().listener.playerPermissions(p, p.getWorld().getName())));
 			p.updateCommands();
 		}
 	}
 
 	public void query(Player p) {
+		HempfestPermissions.getInstance().um.userPermissions.put(p, Arrays.asList(HempfestPermissions.getInstance().listener.playerPermissions(p, p.getWorld().getName())));
 		p.updateCommands();
 	}
 

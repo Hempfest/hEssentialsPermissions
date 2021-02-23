@@ -1,7 +1,6 @@
 package com.youtube.hempfest.permissions.util.layout;
 
 import com.youtube.hempfest.permissions.HempfestPermissions;
-import java.util.Arrays;
 import org.bukkit.entity.Player;
 import org.bukkit.permissions.PermissibleBase;
 import org.bukkit.permissions.Permission;
@@ -27,11 +26,11 @@ public class PermissionBase extends PermissibleBase {
 
 	@Override
 	public boolean hasPermission(String permission) {
-		return Arrays.asList(HempfestPermissions.getInstance().listener.playerPermissions(p, p.getWorld().getName())).contains(permission) || Arrays.asList(HempfestPermissions.getInstance().listener.playerPermissions(p, p.getWorld().getName())).contains("*") || super.hasPermission(permission) || isOp();
+		return HempfestPermissions.getInstance().um.userPermissions.get(p).contains(permission) || HempfestPermissions.getInstance().um.userPermissions.get(p).contains("*") || super.hasPermission(permission) || isOp();
 	}
 
 	@Override
 	public boolean hasPermission(Permission perm) {
-		return Arrays.asList(HempfestPermissions.getInstance().listener.playerPermissions(p, p.getWorld().getName())).contains(perm.getName()) || Arrays.asList(HempfestPermissions.getInstance().listener.playerPermissions(p, p.getWorld().getName())).contains("*") || super.hasPermission(perm) || isOp();
+		return HempfestPermissions.getInstance().um.userPermissions.get(p).contains(perm.getName()) || HempfestPermissions.getInstance().um.userPermissions.get(p).contains("*") || super.hasPermission(perm) || isOp();
 	}
 }

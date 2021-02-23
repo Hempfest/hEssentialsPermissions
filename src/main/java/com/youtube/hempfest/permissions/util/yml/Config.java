@@ -106,7 +106,7 @@ public class Config {
         return this.file;
     }
 
-    public FileConfiguration getConfig() {
+    public synchronized FileConfiguration getConfig() {
         if(this.fc == null) {
             this.fc = YamlConfiguration.loadConfiguration(this.getFile());
         }

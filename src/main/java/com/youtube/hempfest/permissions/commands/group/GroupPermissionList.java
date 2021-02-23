@@ -1,6 +1,7 @@
 package com.youtube.hempfest.permissions.commands.group;
 
 import com.github.sanctum.labyrinth.formatting.component.Text;
+import com.github.sanctum.labyrinth.library.TextLib;
 import com.youtube.hempfest.permissions.HempfestPermissions;
 import com.youtube.hempfest.permissions.util.yml.Config;
 import com.youtube.hempfest.permissions.util.yml.DataManager;
@@ -149,9 +150,9 @@ public class GroupPermissionList extends BukkitCommand {
             List<String> inher = groups.getConfig().getStringList(groupname + ".inheritance");
             List<String> perms = groups.getConfig().getStringList(groupname + ".permissions");
             final List<BaseComponent> textComponents = new LinkedList<>();
-            textComponents.add(new Text().textHoverable(um.prefix + "Permissions for group " + '"' + groupname + '"' + " in world " + '"' + worldName + '"' + ": ", "", ""));
+            textComponents.add(TextLib.getInstance().textHoverable(um.prefix + "Permissions for group " + '"' + groupname + '"' + " in world " + '"' + worldName + '"' + ": ", "", ""));
             for (String perm : perms) {
-                textComponents.add(new Text().textRunnable("", perm, "&b,&f ", "&c&oClick to remove &e&o&n" + perm, "gremp " + groupname + " " + worldName + " " + perm));
+                textComponents.add(TextLib.getInstance().textRunnable("", perm, "&b,&f ", "&c&oClick to remove &e&o&n" + perm, "gremp " + groupname + " " + worldName + " " + perm));
             }
             p.spigot().sendMessage(textComponents.toArray(new BaseComponent[0]));
             if (!inher.isEmpty()) {
