@@ -1,21 +1,20 @@
 package com.youtube.hempfest.permissions.commands.group;
 
-import com.youtube.hempfest.permissions.HempfestPermissions;
-import com.youtube.hempfest.permissions.util.events.PermissionUpdateEvent;
-import com.youtube.hempfest.permissions.util.yml.Config;
-import com.youtube.hempfest.permissions.util.yml.DataManager;
+import com.github.sanctum.labyrinth.data.FileManager;
+import com.youtube.hempfest.permissions.MyPermissions;
 import com.youtube.hempfest.permissions.util.UtilityManager;
+import com.youtube.hempfest.permissions.util.events.PermissionUpdateEvent;
 import com.youtube.hempfest.permissions.util.layout.PermissionHook;
+import com.youtube.hempfest.permissions.util.yml.DataManager;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.World;
 import org.bukkit.command.CommandSender;
 import org.bukkit.command.defaults.BukkitCommand;
 import org.bukkit.entity.Player;
-
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
 
 public class GroupInheritanceRemove extends BukkitCommand {
 
@@ -30,7 +29,7 @@ public class GroupInheritanceRemove extends BukkitCommand {
     }
 
     private String notPlayer() {
-        return String.format("[%s] - You aren't a player..", HempfestPermissions.getInstance().getDescription().getName());
+        return String.format("[%s] - You aren't a player..", MyPermissions.getInstance().getDescription().getName());
     }
 
     private final List<String> arguments = new ArrayList<String>();
@@ -60,12 +59,12 @@ public class GroupInheritanceRemove extends BukkitCommand {
             }
             return result;
         }
-        return null;
+        return super.tabComplete(sender, alias, args);
     }
 
     @Override
     public boolean execute(CommandSender commandSender, String commandLabel, String[] args) {
-        UtilityManager um = new UtilityManager();
+        UtilityManager um = MyPermissions.getInstance().getManager();
         PermissionHook listener = new PermissionHook();
         if (!(commandSender instanceof Player)) {
             int length = args.length;
@@ -102,7 +101,7 @@ public class GroupInheritanceRemove extends BukkitCommand {
                     sendMessage(commandSender, um.prefix + "&c&oWorld " + '"' + world + '"' + " not found.");
                     return true;
                 }
-                Config groups = dm.getGroups(world);
+                FileManager groups = dm.getGroups(world);
                 List<String> inher = groups.getConfig().getStringList(group + ".inheritance");
                 if (!inher.contains(groupToRem)) {
                     sendMessage(commandSender, um.prefix + "&c&oGroup " + '"' + group + '"' + " doesn't inherit permissions from group " + '"' + groupToRem + '"');
@@ -163,13 +162,17 @@ public class GroupInheritanceRemove extends BukkitCommand {
                 sendMessage(p, um.prefix + "&c&oA group by the name of " + '"' + groupToRem + '"' + " doesn't exist in world " + '"' + world + '"');
                 return true;
             }
+            if (MyPermissions.getInstance().getPermissionHook().groupWeight(group, world) >= MyPermissions.getInstance().getPermissionHook().groupWeight(MyPermissions.getInstance().getPermissionHook().getGroup(p, world), world)) {
+                sendMessage(p, um.prefix + "&c&oThis group has higher than or equal to rank priority than you, unable to modify group.");
+                return true;
+            }
             DataManager dm = new DataManager();
             List<String> worlds = Arrays.asList(um.getWorlds());
             if (!worlds.contains(world)) {
                 sendMessage(p, um.prefix + "&c&oWorld " + '"' + world + '"' + " not found.");
                 return true;
             }
-            Config groups = dm.getGroups(world);
+            FileManager groups = dm.getGroups(world);
             List<String> inher = groups.getConfig().getStringList(group + ".inheritance");
             if (!inher.contains(groupToRem)) {
                 sendMessage(p, um.prefix + "&c&oGroup " + '"' + group + '"' + " doesn't inherit permissions from group " + '"' + groupToRem + '"');

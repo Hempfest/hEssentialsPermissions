@@ -1,6 +1,7 @@
 package com.youtube.hempfest.permissions.commands.user;
 
 import com.github.sanctum.labyrinth.formatting.string.PaginatedAssortment;
+import com.youtube.hempfest.permissions.MyPermissions;
 import com.youtube.hempfest.permissions.util.UtilityManager;
 import java.util.ArrayList;
 import java.util.Collections;
@@ -15,7 +16,7 @@ public class User extends BukkitCommand {
 	public User() {
 		super("user");
 		setAliases(Collections.singletonList("u"));
-		setPermission("hpermissions.user");
+		setPermission("mess.user");
 	}
 
 	List<String> getMenu() {
@@ -42,7 +43,7 @@ public class User extends BukkitCommand {
 
 	@Override
 	public boolean execute(CommandSender commandSender, String s, String[] args) {
-		UtilityManager um = new UtilityManager();
+		UtilityManager um = MyPermissions.getInstance().getManager();
 		if (!(commandSender instanceof Player)) {
 
 			return true;

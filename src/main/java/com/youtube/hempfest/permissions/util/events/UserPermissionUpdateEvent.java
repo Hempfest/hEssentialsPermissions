@@ -1,6 +1,6 @@
 package com.youtube.hempfest.permissions.util.events;
 
-import com.youtube.hempfest.permissions.HempfestPermissions;
+import com.youtube.hempfest.permissions.MyPermissions;
 import com.youtube.hempfest.permissions.util.events.misc.PermissionUpdateType;
 import java.util.Arrays;
 import java.util.List;
@@ -31,7 +31,7 @@ public class UserPermissionUpdateEvent extends PermissionUpdateEvent {
 	}
 
 	public String[] getHolderPerms() {
-		return HempfestPermissions.getInstance().listener.playerPermissions(UUID.fromString(uuid), world);
+		return MyPermissions.getInstance().getPermissionHook().playerPermissions(UUID.fromString(uuid), world);
 	}
 
 	public String getHolder() {

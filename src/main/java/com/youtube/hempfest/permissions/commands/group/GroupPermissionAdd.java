@@ -1,6 +1,6 @@
 package com.youtube.hempfest.permissions.commands.group;
 
-import com.youtube.hempfest.permissions.HempfestPermissions;
+import com.youtube.hempfest.permissions.MyPermissions;
 import com.youtube.hempfest.permissions.util.UtilityManager;
 import com.youtube.hempfest.permissions.util.layout.PermissionHook;
 import java.util.LinkedList;
@@ -28,7 +28,7 @@ public class GroupPermissionAdd extends BukkitCommand {
     }
 
     private String notPlayer() {
-        return String.format("[%s] - You aren't a player..", HempfestPermissions.getInstance().getDescription().getName());
+        return String.format("[%s] - You aren't a player..", MyPermissions.getInstance().getDescription().getName());
     }
 
     private final List<String> arguments = new ArrayList<String>();
@@ -58,12 +58,39 @@ public class GroupPermissionAdd extends BukkitCommand {
             }
             return result;
         }
-        return null;
+        if (args.length == 3) {
+            arguments.clear();
+            arguments.addAll(MyPermissions.getInstance().getManager().getPermissionsLibrary());
+            for (String a : arguments) {
+                if (a.toLowerCase().startsWith(args[2].toLowerCase()))
+                    result.add(a);
+            }
+            return result;
+        }
+        if (args.length == 4) {
+            arguments.clear();
+            arguments.addAll(MyPermissions.getInstance().getManager().getPermissionsLibrary());
+            for (String a : arguments) {
+                if (a.toLowerCase().startsWith(args[3].toLowerCase()))
+                    result.add(a);
+            }
+            return result;
+        }
+        if (args.length == 5) {
+            arguments.clear();
+            arguments.addAll(MyPermissions.getInstance().getManager().getPermissionsLibrary());
+            for (String a : arguments) {
+                if (a.toLowerCase().startsWith(args[4].toLowerCase()))
+                    result.add(a);
+            }
+            return result;
+        }
+        return super.tabComplete(sender, alias, args);
     }
 
     @Override
     public boolean execute(CommandSender commandSender, String commandLabel, String[] args) {
-        UtilityManager um = new UtilityManager();
+        UtilityManager um = MyPermissions.getInstance().getManager();
         PermissionHook listener = new PermissionHook();
         if (!(commandSender instanceof Player)) {
             int length = args.length;
@@ -213,6 +240,10 @@ public class GroupPermissionAdd extends BukkitCommand {
                 sendMessage(p, um.prefix + "&c&oA group by the name of " + '"' + groupname + '"' + " doesn't exist in world " + '"' + worldName + '"');
                 return true;
             }
+            if (MyPermissions.getInstance().getPermissionHook().groupWeight(groupname, worldName) >= MyPermissions.getInstance().getPermissionHook().groupWeight(MyPermissions.getInstance().getPermissionHook().getGroup(p, worldName), worldName)) {
+                sendMessage(p, um.prefix + "&c&oThis group has higher than or equal to rank priority than you, unable to modify group.");
+                return true;
+            }
             List<String> permList = Arrays.asList(listener.groupPermissions(groupname, worldName));
             if (permList.contains(permission)) {
                 sendMessage(p, um.prefix + "&c&oGroup " + '"' + groupname + '"' + " already has direct access to permission " + '"' + permission + '"' + " in world " + '"' + worldName + '"');
@@ -235,6 +266,10 @@ public class GroupPermissionAdd extends BukkitCommand {
             String permission2 = args[3];
             if (!Arrays.asList(listener.getAllGroups(worldName)).contains(groupname)) {
                 sendMessage(p, um.prefix + "&c&oA group by the name of " + '"' + groupname + '"' + " doesn't exist in world " + '"' + worldName + '"');
+                return true;
+            }
+            if (MyPermissions.getInstance().getPermissionHook().groupWeight(groupname, worldName) >= MyPermissions.getInstance().getPermissionHook().groupWeight(MyPermissions.getInstance().getPermissionHook().getGroup(p, worldName), worldName)) {
+                sendMessage(p, um.prefix + "&c&oThis group has higher than or equal to rank priority than you, unable to modify group.");
                 return true;
             }
             List<String> worlds = Arrays.asList(um.getWorlds());
@@ -267,6 +302,10 @@ public class GroupPermissionAdd extends BukkitCommand {
             String permission3 = args[4];
             if (!Arrays.asList(listener.getAllGroups(worldName)).contains(groupname)) {
                 sendMessage(p, um.prefix + "&c&oA group by the name of " + '"' + groupname + '"' + " doesn't exist in world " + '"' + worldName + '"');
+                return true;
+            }
+            if (MyPermissions.getInstance().getPermissionHook().groupWeight(groupname, worldName) >= MyPermissions.getInstance().getPermissionHook().groupWeight(MyPermissions.getInstance().getPermissionHook().getGroup(p, worldName), worldName)) {
+                sendMessage(p, um.prefix + "&c&oThis group has higher than or equal to rank priority than you, unable to modify group.");
                 return true;
             }
             List<String> worlds = Arrays.asList(um.getWorlds());

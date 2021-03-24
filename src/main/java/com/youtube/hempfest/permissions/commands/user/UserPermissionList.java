@@ -1,10 +1,10 @@
 package com.youtube.hempfest.permissions.commands.user;
 
+import com.github.sanctum.labyrinth.data.FileManager;
 import com.github.sanctum.labyrinth.formatting.component.Text;
-import com.youtube.hempfest.permissions.HempfestPermissions;
+import com.youtube.hempfest.permissions.MyPermissions;
 import com.youtube.hempfest.permissions.util.UtilityManager;
 import com.youtube.hempfest.permissions.util.layout.PermissionHook;
-import com.youtube.hempfest.permissions.util.yml.Config;
 import com.youtube.hempfest.permissions.util.yml.DataManager;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -32,7 +32,7 @@ public class UserPermissionList extends BukkitCommand {
     }
 
     private String notPlayer() {
-        return String.format("[%s] - You aren't a player..", HempfestPermissions.getInstance().getDescription().getName());
+        return String.format("[%s] - You aren't a player..", MyPermissions.getInstance().getDescription().getName());
     }
 
     private final List<String> arguments = new ArrayList<String>();
@@ -62,12 +62,12 @@ public class UserPermissionList extends BukkitCommand {
             }
             return result;
         }
-        return null;
+        return super.tabComplete(sender, alias, args);
     }
 
     @Override
     public boolean execute(CommandSender commandSender, String commandLabel, String[] args) {
-        UtilityManager um = new UtilityManager();
+        UtilityManager um = MyPermissions.getInstance().getManager();
         PermissionHook listener = new PermissionHook();
         if (!(commandSender instanceof Player)) {
             int length = args.length;
@@ -90,7 +90,7 @@ public class UserPermissionList extends BukkitCommand {
                     sendMessage(commandSender, um.prefix + "&c&oWorld " + '"' + worldName + '"' + " not found.");
                     return true;
                 }
-                Config users = dm.getUsers(worldName);
+                FileManager users = dm.getUsers(worldName);
                 UUID id = um.usernameToUUID(playerName);
                 if (id == null) {
                     sendMessage(commandSender, um.prefix + "&c&oA user by the name of " + '"' + playerName + '"' + " wasn't found in world " + '"' + worldName + '"');
@@ -142,14 +142,14 @@ public class UserPermissionList extends BukkitCommand {
                 sendMessage(commandSender, um.prefix + "&c&oWorld " + '"' + worldName + '"' + " not found.");
                 return true;
             }
-            Config users = dm.getUsers(worldName);
+            FileManager users = dm.getUsers(worldName);
             UUID id = um.usernameToUUID(playerName);
             if (id == null) {
                 sendMessage(commandSender, um.prefix + "&c&oA user by the name of " + '"' + playerName + '"' + " wasn't found in world " + '"' + worldName + '"');
                 return true;
             }
             List<String> inher = users.getConfig().getStringList( "User-List." + id.toString() + ".sub-groups");
-            inher.add(HempfestPermissions.getInstance().listener.getGroup(id, worldName));
+            inher.add(MyPermissions.getInstance().getPermissionHook().getGroup(id, worldName));
             List<String> perms = users.getConfig().getStringList("User-List." + id.toString() + ".permissions");
             final List<BaseComponent> textComponents = new LinkedList<>();
             textComponents.add(new Text().textHoverable(um.prefix + "Permissions for user " + '"' + playerName + '"' + " in world " + '"' + worldName + '"' + ": ", "", ""));

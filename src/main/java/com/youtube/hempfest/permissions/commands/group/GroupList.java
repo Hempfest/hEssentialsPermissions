@@ -1,6 +1,6 @@
 package com.youtube.hempfest.permissions.commands.group;
 
-import com.youtube.hempfest.permissions.HempfestPermissions;
+import com.youtube.hempfest.permissions.MyPermissions;
 import com.youtube.hempfest.permissions.util.yml.DataManager;
 import com.youtube.hempfest.permissions.util.UtilityManager;
 import com.youtube.hempfest.permissions.util.layout.PermissionHook;
@@ -26,12 +26,12 @@ public class GroupList extends BukkitCommand {
     }
 
     private String notPlayer() {
-        return String.format("[%s] - You aren't a player..", HempfestPermissions.getInstance().getDescription().getName());
+        return String.format("[%s] - You aren't a player..", MyPermissions.getInstance().getDescription().getName());
     }
 
     @Override
     public boolean execute(CommandSender commandSender, String commandLabel, String[] args) {
-        UtilityManager um = new UtilityManager();
+        UtilityManager um = MyPermissions.getInstance().getManager();
         PermissionHook listener = new PermissionHook();
         if (!(commandSender instanceof Player)) {
             int length = args.length;

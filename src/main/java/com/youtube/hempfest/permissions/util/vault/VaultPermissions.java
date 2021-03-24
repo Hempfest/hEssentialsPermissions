@@ -1,18 +1,17 @@
 package com.youtube.hempfest.permissions.util.vault;
 
-import com.youtube.hempfest.permissions.HempfestPermissions;
-import com.youtube.hempfest.permissions.util.UtilityManager;
+import com.youtube.hempfest.permissions.MyPermissions;
 import com.youtube.hempfest.permissions.util.layout.PermissionHook;
 import net.milkbowl.vault.permission.Permission;
 import org.bukkit.OfflinePlayer;
 
 public class VaultPermissions extends Permission {
 
-    private final PermissionHook listener = HempfestPermissions.getInstance().listener;
+    private final PermissionHook listener = MyPermissions.getInstance().getPermissionHook();
 
     @Override
     public String getName() {
-        return HempfestPermissions.getInstance().getDescription().getName();
+        return MyPermissions.getInstance().getDescription().getName();
     }
 
     @Override
@@ -27,35 +26,32 @@ public class VaultPermissions extends Permission {
 
     @Override
     public boolean playerHas(String world, String player, String permission) {
-        return false;
+        return listener.playerHas(MyPermissions.getInstance().getManager().getUser(player), world, permission);
     }
 
     @Override
     public boolean playerHas(String world, OfflinePlayer player, String permission) {
-
         return listener.playerHas(player, world, permission);
     }
 
     @Override
     public boolean playerAdd(String world, String playerName, String permission) {
-        return true;
+        return listener.playerGive(MyPermissions.getInstance().getManager().getUser(playerName), world, permission);
     }
 
     @Override
     public boolean playerAdd(String world, OfflinePlayer player, String permission) {
-        listener.playerGive(player, world, permission);
-        return true;
+        return listener.playerGive(player, world, permission);
     }
 
     @Override
     public boolean playerRemove(String world, String playerName, String permission) {
-        return false;
+        return listener.playerTake(MyPermissions.getInstance().getManager().getUser(playerName), world, permission);
     }
 
     @Override
     public boolean playerRemove(String world, OfflinePlayer player, String permission) {
-        listener.playerTake(player, world, permission);
-        return false;
+        return listener.playerTake(player, world, permission);
     }
 
     @Override
@@ -65,19 +61,17 @@ public class VaultPermissions extends Permission {
 
     @Override
     public boolean groupAdd(String world, String group, String permission) {
-        listener.groupGive(group, world, permission);
-        return true;
+        return listener.groupGive(group, world, permission);
     }
 
     @Override
     public boolean groupRemove(String world, String group, String permission) {
-        listener.groupTake(group, world, permission);
-        return true;
+        return listener.groupTake(group, world, permission);
     }
 
     @Override
     public boolean playerInGroup(String world, String playerName, String group) {
-        return false;
+        return listener.playerInGroup(MyPermissions.getInstance().getManager().getUser(playerName), world, group);
     }
 
     @Override
@@ -87,29 +81,27 @@ public class VaultPermissions extends Permission {
 
     @Override
     public boolean playerAddGroup(String world, String playerName, String group) {
-        return false;
+        return listener.playerGiveGroup(MyPermissions.getInstance().getManager().getUser(playerName), world, group);
     }
 
     @Override
     public boolean playerAddGroup(String world, OfflinePlayer player, String group) {
-        listener.playerGiveGroup(player, world, group);
-        return true;
+        return listener.playerGiveGroup(player, world, group);
     }
 
     @Override
     public boolean playerRemoveGroup(String world, String playerName, String group) {
-        return false;
+        return listener.playerTakeGroup(MyPermissions.getInstance().getManager().getUser(playerName),world, group);
     }
 
     @Override
     public boolean playerRemoveGroup(String world, OfflinePlayer player, String group) {
-        listener.playerTakeGroup(player,world, group);
-        return true;
+        return listener.playerTakeGroup(player,world, group);
     }
 
     @Override
     public String[] getPlayerGroups(String world, String playerName) {
-        return new String[0];
+        return listener.getGroups(MyPermissions.getInstance().getManager().getUser(playerName), world);
     }
 
     @Override
@@ -124,7 +116,7 @@ public class VaultPermissions extends Permission {
 
     @Override
     public String getPrimaryGroup(String world, String playerName) {
-        return null;
+        return listener.getGroup(MyPermissions.getInstance().getManager().getUser(playerName), world);
     }
 
     @Override

@@ -1,6 +1,7 @@
 package com.youtube.hempfest.permissions.commands.group;
 
 import com.github.sanctum.labyrinth.formatting.string.PaginatedAssortment;
+import com.youtube.hempfest.permissions.MyPermissions;
 import com.youtube.hempfest.permissions.util.UtilityManager;
 import java.util.ArrayList;
 import java.util.Collections;
@@ -15,7 +16,7 @@ public class Group extends BukkitCommand {
 	public Group() {
 		super("group");
 		setAliases(Collections.singletonList("g"));
-		setPermission("hpermissions.group");
+		setPermission("mess.group");
 	}
 
 	List<String> getMenu() {
@@ -35,9 +36,11 @@ public class Group extends BukkitCommand {
 		array.add(" ");
 		array.add("/glistp <groupName> <worldName> - &eList all group permissions within a specified world.");
 		array.add(" ");
-		array.add("/glist <worldName> - &eList all groups within a specified world.\n");
+		array.add("/glist <worldName> - &eList all groups within a specified world.");
 		array.add(" ");
 		array.add("/gload - &eReload the " + '"' + "Groups" + '"' + " file through-out all worlds.");
+		array.add(" ");
+		array.add("/gsetw <groupName> <worldName> <weight> - &eSet the weight of a given group.");
 		return array;
 	}
 
@@ -47,7 +50,7 @@ public class Group extends BukkitCommand {
 
 	@Override
 	public boolean execute(CommandSender commandSender, String s, String[] args) {
-		UtilityManager um = new UtilityManager();
+		UtilityManager um = MyPermissions.getInstance().getManager();
 		if (!(commandSender instanceof Player)) {
 
 			return true;

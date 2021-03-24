@@ -1,13 +1,16 @@
 package com.youtube.hempfest.permissions.commands.group;
 
-import com.github.sanctum.labyrinth.formatting.component.Text;
+import com.github.sanctum.labyrinth.data.FileManager;
 import com.github.sanctum.labyrinth.library.TextLib;
-import com.youtube.hempfest.permissions.HempfestPermissions;
-import com.youtube.hempfest.permissions.util.yml.Config;
-import com.youtube.hempfest.permissions.util.yml.DataManager;
+import com.youtube.hempfest.permissions.MyPermissions;
 import com.youtube.hempfest.permissions.util.UtilityManager;
+import com.youtube.hempfest.permissions.util.gui.GUI;
 import com.youtube.hempfest.permissions.util.layout.PermissionHook;
+import com.youtube.hempfest.permissions.util.yml.DataManager;
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.LinkedList;
+import java.util.List;
 import net.md_5.bungee.api.chat.BaseComponent;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
@@ -15,10 +18,6 @@ import org.bukkit.World;
 import org.bukkit.command.CommandSender;
 import org.bukkit.command.defaults.BukkitCommand;
 import org.bukkit.entity.Player;
-
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
 
 public class GroupPermissionList extends BukkitCommand {
 
@@ -33,7 +32,7 @@ public class GroupPermissionList extends BukkitCommand {
     }
 
     private String notPlayer() {
-        return String.format("[%s] - You aren't a player..", HempfestPermissions.getInstance().getDescription().getName());
+        return String.format("[%s] - You aren't a player..", MyPermissions.getInstance().getDescription().getName());
     }
 
     private final List<String> arguments = new ArrayList<String>();
@@ -63,12 +62,12 @@ public class GroupPermissionList extends BukkitCommand {
             }
             return result;
         }
-        return null;
+        return super.tabComplete(sender, alias, args);
     }
 
     @Override
     public boolean execute(CommandSender commandSender, String commandLabel, String[] args) {
-        UtilityManager um = new UtilityManager();
+        UtilityManager um = MyPermissions.getInstance().getManager();
         PermissionHook listener = new PermissionHook();
         if (!(commandSender instanceof Player)) {
             int length = args.length;
@@ -91,7 +90,7 @@ public class GroupPermissionList extends BukkitCommand {
                     sendMessage(commandSender, um.prefix + "&c&oWorld " + '"' + worldName + '"' + " not found.");
                     return true;
                 }
-                Config groups = dm.getGroups(worldName);
+                FileManager groups = dm.getGroups(worldName);
                 if (!groups.getConfig().getKeys(false).contains(groupname)) {
                     sendMessage(commandSender, um.prefix + "&c&oA group by the name of " + '"' + groupname + '"' + " doesn't exist in world " + '"' + worldName + '"');
                     return true;
@@ -136,13 +135,14 @@ public class GroupPermissionList extends BukkitCommand {
         if (length == 2) {
             String groupname = args[0];
             String worldName = args[1];
+            GUI.SingleMenu.GROUP_EDIT.get(groupname, worldName).open(p);
             DataManager dm = new DataManager();
             List<String> worlds = Arrays.asList(um.getWorlds());
             if (!worlds.contains(worldName)) {
                 sendMessage(p, um.prefix + "&c&oWorld " + '"' + worldName + '"' + " not found.");
                 return true;
             }
-            Config groups = dm.getGroups(worldName);
+            FileManager groups = dm.getGroups(worldName);
             if (!groups.getConfig().getKeys(false).contains(groupname)) {
                 sendMessage(p, um.prefix + "&c&oA group by the name of " + '"' + groupname + '"' + " doesn't exist in world " + '"' + worldName + '"');
                 return true;

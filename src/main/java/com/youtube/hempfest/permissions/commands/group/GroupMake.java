@@ -1,10 +1,13 @@
 package com.youtube.hempfest.permissions.commands.group;
 
-import com.youtube.hempfest.permissions.HempfestPermissions;
-import com.youtube.hempfest.permissions.util.yml.Config;
-import com.youtube.hempfest.permissions.util.yml.DataManager;
+import com.github.sanctum.labyrinth.data.FileManager;
+import com.youtube.hempfest.permissions.MyPermissions;
 import com.youtube.hempfest.permissions.util.UtilityManager;
 import com.youtube.hempfest.permissions.util.layout.PermissionHook;
+import com.youtube.hempfest.permissions.util.yml.DataManager;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.World;
@@ -12,10 +15,7 @@ import org.bukkit.command.CommandSender;
 import org.bukkit.command.defaults.BukkitCommand;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.entity.Player;
-
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
+import org.jetbrains.annotations.NotNull;
 
 public class GroupMake extends BukkitCommand {
 
@@ -30,12 +30,12 @@ public class GroupMake extends BukkitCommand {
     }
 
     private String notPlayer() {
-        return String.format("[%s] - You aren't a player..", HempfestPermissions.getInstance().getDescription().getName());
+        return String.format("[%s] - You aren't a player..", MyPermissions.getInstance().getDescription().getName());
     }
     private final List<String> arguments = new ArrayList<String>();
 
     @Override
-    public List<String> tabComplete(CommandSender sender, String alias, String[] args) throws IllegalArgumentException {
+    public @NotNull List<String> tabComplete(@NotNull CommandSender sender, @NotNull String alias, String[] args) throws IllegalArgumentException {
         List<String> result = new ArrayList<>();
         if (args.length == 2) {
             arguments.clear();
@@ -48,12 +48,12 @@ public class GroupMake extends BukkitCommand {
             }
             return result;
         }
-        return null;
+        return super.tabComplete(sender, alias, args);
     }
 
     @Override
-    public boolean execute(CommandSender commandSender, String commandLabel, String[] args) {
-        UtilityManager um = new UtilityManager();
+    public boolean execute(@NotNull CommandSender commandSender, @NotNull String commandLabel, String[] args) {
+        UtilityManager um = MyPermissions.getInstance().getManager();
         PermissionHook listener = new PermissionHook();
         if (!(commandSender instanceof Player)) {
             int length = args.length;
@@ -76,7 +76,7 @@ public class GroupMake extends BukkitCommand {
                     sendMessage(commandSender, um.prefix + "&c&oWorld " + '"' + worldName + '"' + " not found.");
                     return true;
                 }
-                Config groups = dm.getGroups(worldName);
+                FileManager groups = dm.getGroups(worldName);
                 FileConfiguration fc = groups.getConfig();
                 if (fc.getKeys(false).contains(groupName)) {
                     sendMessage(commandSender, um.prefix + "&c&oA group by the name of " + '"' + groupName + '"' + " already exists in world " + '"' + worldName + '"');
@@ -97,7 +97,7 @@ public class GroupMake extends BukkitCommand {
                     sendMessage(commandSender, um.prefix + "&c&oWorld " + '"' + worldName + '"' + " not found.");
                     return true;
                 }
-                Config groups = dm.getGroups(worldName);
+                FileManager groups = dm.getGroups(worldName);
                 FileConfiguration fc = groups.getConfig();
                 if (fc.getKeys(false).contains(groupName)) {
                     sendMessage(commandSender, um.prefix + "&c&oA group by the name of " + '"' + groupName + '"' + " already exists in world " + '"' + worldName + '"');
@@ -146,7 +146,7 @@ public class GroupMake extends BukkitCommand {
                 sendMessage(p, um.prefix + "&c&oWorld " + '"' + worldName + '"' + " not found.");
                 return true;
             }
-            Config groups = dm.getGroups(worldName);
+            FileManager groups = dm.getGroups(worldName);
             FileConfiguration fc = groups.getConfig();
             if (fc.getKeys(false).contains(groupName)) {
                 sendMessage(p, um.prefix + "&c&oA group by the name of " + '"' + groupName + '"' + " already exists in world " + '"' + worldName + '"');
@@ -167,7 +167,7 @@ public class GroupMake extends BukkitCommand {
                 sendMessage(p, um.prefix + "&c&oWorld " + '"' + worldName + '"' + " not found.");
                 return true;
             }
-            Config groups = dm.getGroups(worldName);
+            FileManager groups = dm.getGroups(worldName);
             FileConfiguration fc = groups.getConfig();
             if (fc.getKeys(false).contains(groupName)) {
                 sendMessage(p, um.prefix + "&c&oA group by the name of " + '"' + groupName + '"' + " already exists in world " + '"' + worldName + '"');

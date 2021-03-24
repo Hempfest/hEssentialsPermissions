@@ -1,6 +1,6 @@
 package com.youtube.hempfest.permissions.util.layout;
 
-import com.youtube.hempfest.permissions.HempfestPermissions;
+import com.youtube.hempfest.permissions.MyPermissions;
 import org.bukkit.entity.Player;
 import org.bukkit.permissions.PermissibleBase;
 import org.bukkit.permissions.Permission;
@@ -26,11 +26,22 @@ public class PermissionBase extends PermissibleBase {
 
 	@Override
 	public boolean hasPermission(String permission) {
-		return HempfestPermissions.getInstance().um.userPermissions.get(p).contains(permission) || HempfestPermissions.getInstance().um.userPermissions.get(p).contains("*") || super.hasPermission(permission) || isOp();
+		MyPermissions.getInstance().getManager().inject(permission);
+		try {
+			return MyPermissions.getInstance().getManager().userPermissions.get(p).contains(permission) || MyPermissions.getInstance().getManager().userPermissions.get(p).contains("*") || super.hasPermission(permission) || isOp();
+		} catch (NullPointerException e) {
+			return super.hasPermission(permission);
+		}
 	}
 
 	@Override
 	public boolean hasPermission(Permission perm) {
-		return HempfestPermissions.getInstance().um.userPermissions.get(p).contains(perm.getName()) || HempfestPermissions.getInstance().um.userPermissions.get(p).contains("*") || super.hasPermission(perm) || isOp();
+		MyPermissions.getInstance().getManager().inject(perm.getName());
+		try {
+			return MyPermissions.getInstance().getManager().userPermissions.get(p).contains(perm.getName()) || MyPermissions.getInstance().getManager().userPermissions.get(p).contains("*") || super.hasPermission(perm) || isOp();
+		} catch (NullPointerException e) {
+			return super.hasPermission(perm);
+		}
 	}
+
 }

@@ -1,6 +1,7 @@
 package com.youtube.hempfest.permissions.util.yml;
 
-import com.youtube.hempfest.permissions.util.yml.Config;
+import com.github.sanctum.labyrinth.data.FileManager;
+import com.youtube.hempfest.permissions.MyPermissions;
 import org.bukkit.entity.Player;
 
 public class DataManager {
@@ -13,12 +14,12 @@ public class DataManager {
        this.p = p;
    }
 
-    public Config getUsers(String world) {
-        return new Config("Users", "worlds/" + world);
+    public FileManager getUsers(String world) {
+        return MyPermissions.getInstance().getFileList().find("Users", "worlds/" + world);
     }
 
-    public Config getGroups(String world) {
-        return new Config("Groups", "worlds/" + world);
+    public FileManager getGroups(String world) {
+        return MyPermissions.getInstance().getFileList().find("Groups", "worlds/" + world);
     }
 
 }

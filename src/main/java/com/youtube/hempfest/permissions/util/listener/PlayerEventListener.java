@@ -1,8 +1,8 @@
-package com.youtube.hempfest.permissions.util;
+package com.youtube.hempfest.permissions.util.listener;
 
-import com.youtube.hempfest.permissions.HempfestPermissions;
+import com.youtube.hempfest.permissions.MyPermissions;
+import com.youtube.hempfest.permissions.util.UtilityManager;
 import com.youtube.hempfest.permissions.util.events.PermissionUpdateEvent;
-import com.youtube.hempfest.permissions.util.yml.Config;
 import java.util.Arrays;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
@@ -13,21 +13,21 @@ import org.bukkit.event.player.PlayerChangedWorldEvent;
 import org.bukkit.event.player.PlayerJoinEvent;
 import org.bukkit.event.player.PlayerQuitEvent;
 
-public class EventListener implements Listener {
+public class PlayerEventListener implements Listener {
 
     @EventHandler(priority = EventPriority.LOWEST, ignoreCancelled = true)
     public void onJoin(PlayerJoinEvent e) {
         Player p = e.getPlayer();
-        UtilityManager um = new UtilityManager(p);
+        UtilityManager um = UtilityManager.get(p);
         um.generateUserFile();
-        HempfestPermissions.getInstance().um.userPermissions.put(p, Arrays.asList(HempfestPermissions.getInstance().listener.playerPermissions(p, p.getWorld().getName())));
-        HempfestPermissions.getInstance().inject(p);
+        MyPermissions.getInstance().getManager().userPermissions.put(p, Arrays.asList(MyPermissions.getInstance().getPermissionHook().playerPermissions(p, p.getWorld().getName())));
+        MyPermissions.getInstance().inject(p);
     }
 
-    @EventHandler(priority = EventPriority.HIGH, ignoreCancelled = true)
+    @EventHandler
     public void onLeave(PlayerQuitEvent e) {
         Player p = e.getPlayer();
-        HempfestPermissions.getInstance().um.userPermissions.remove(p);
+        MyPermissions.getInstance().getManager().userPermissions.remove(p);
     }
 
     @EventHandler
@@ -35,7 +35,7 @@ public class EventListener implements Listener {
             PermissionUpdateEvent event = new PermissionUpdateEvent();
             Bukkit.getPluginManager().callEvent(event);
             if (!event.isCancelled()) {
-                if (!Config.get("Config", "data").getBoolean("global.ignore-world-container")) {
+                if (!MyPermissions.getInstance().getFileList().find("Config", "data").getConfig().getBoolean("global.ignore-world-container")) {
                     event.query(e.getPlayer());
                 }
             }

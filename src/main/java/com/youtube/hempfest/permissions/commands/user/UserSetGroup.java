@@ -1,21 +1,24 @@
 package com.youtube.hempfest.permissions.commands.user;
 
-import com.youtube.hempfest.permissions.HempfestPermissions;
-import com.youtube.hempfest.permissions.util.events.PermissionUpdateEvent;
-import com.youtube.hempfest.permissions.util.yml.Config;
-import com.youtube.hempfest.permissions.util.yml.DataManager;
+import com.github.sanctum.labyrinth.data.FileManager;
+import com.youtube.hempfest.permissions.MyPermissions;
 import com.youtube.hempfest.permissions.util.UtilityManager;
+import com.youtube.hempfest.permissions.util.events.PermissionUpdateEvent;
+import com.youtube.hempfest.permissions.util.events.UserPermissionUpdateEvent;
+import com.youtube.hempfest.permissions.util.events.misc.PermissionUpdateType;
 import com.youtube.hempfest.permissions.util.layout.PermissionHook;
+import com.youtube.hempfest.permissions.util.yml.DataManager;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+import java.util.Objects;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
+import org.bukkit.OfflinePlayer;
 import org.bukkit.World;
 import org.bukkit.command.CommandSender;
 import org.bukkit.command.defaults.BukkitCommand;
 import org.bukkit.entity.Player;
-
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
 
 public class UserSetGroup extends BukkitCommand {
 
@@ -30,7 +33,7 @@ public class UserSetGroup extends BukkitCommand {
     }
 
     private String notPlayer() {
-        return String.format("[%s] - You aren't a player..", HempfestPermissions.getInstance().getDescription().getName());
+        return String.format("[%s] - You aren't a player..", MyPermissions.getInstance().getDescription().getName());
     }
 
     private final List<String> arguments = new ArrayList<String>();
@@ -60,12 +63,12 @@ public class UserSetGroup extends BukkitCommand {
             }
             return result;
         }
-        return null;
+        return super.tabComplete(sender, alias, args);
     }
 
     @Override
     public boolean execute(CommandSender commandSender, String commandLabel, String[] args) {
-        UtilityManager um = new UtilityManager();
+        UtilityManager um = MyPermissions.getInstance().getManager();
         PermissionHook listener = new PermissionHook();
         if (!(commandSender instanceof Player)) {
 
@@ -93,7 +96,7 @@ public class UserSetGroup extends BukkitCommand {
                     sendMessage(commandSender, um.prefix + "&c&oWorld " + '"' + worldName + '"' + " not found.");
                     return true;
                 }
-                Config users = dm.getUsers(worldName);
+                FileManager users = dm.getUsers(worldName);
                 if (!Arrays.asList(listener.getAllUserNames(worldName)).contains(playerName)) {
                     sendMessage(commandSender, um.prefix + "&c&oA user by the name of " + '"' + playerName + '"' + " was not found in world " + '"' + worldName + '"');
                     return true;
@@ -104,7 +107,7 @@ public class UserSetGroup extends BukkitCommand {
                 }
                 users.getConfig().set("User-List." + um.usernameToUUID(playerName) + ".group", groupName);
                 users.saveConfig();
-                System.out.println(String.format("[%s] - Updated user " + '"' + playerName + '"' + " to group " + '"' + groupName + '"' + " in world " + '"' + worldName + '"', HempfestPermissions.getInstance().getDescription().getName()));
+                System.out.println(String.format("[%s] - Updated user " + '"' + playerName + '"' + " to group " + '"' + groupName + '"' + " in world " + '"' + worldName + '"', MyPermissions.getInstance().getDescription().getName()));
                 sendMessage(commandSender, um.prefix + "&d&oUpdated user " + '"' + playerName + '"' + " to group " + '"' + groupName + '"' + " in world " + '"' + worldName + '"');
                 if (Bukkit.getOfflinePlayer(um.usernameToUUID(playerName)).isOnline()) {
                     sendMessage(Bukkit.getPlayer(playerName), um.prefix + "&e&oYou've been moved to rank &f&n" + groupName);
@@ -158,10 +161,16 @@ public class UserSetGroup extends BukkitCommand {
                 sendMessage(p, um.prefix + "&c&oWorld " + '"' + worldName + '"' + " not found.");
                 return true;
             }
-            Config users = dm.getUsers(worldName);
+            FileManager users = dm.getUsers(worldName);
             if (!Arrays.asList(listener.getAllUserNames(worldName)).contains(playerName)) {
                 sendMessage(p, um.prefix + "&c&oA user by the name of " + '"' + playerName + '"' + " was not found in world " + '"' + worldName + '"');
                 return true;
+            }
+            if (!playerName.equals(p.getName())) {
+                if (MyPermissions.getInstance().getPermissionHook().groupWeight(MyPermissions.getInstance().getPermissionHook().getGroup(um.usernameToUUID(playerName), worldName), worldName) >= MyPermissions.getInstance().getPermissionHook().groupWeight(MyPermissions.getInstance().getPermissionHook().getGroup(p, worldName), worldName)) {
+                    sendMessage(p, um.prefix + "&c&oThis user has higher than or equal to rank priority, unable to modify user permissions.");
+                    return true;
+                }
             }
             if (!Arrays.asList(listener.getAllGroups(worldName)).contains(groupName)) {
                 sendMessage(p, um.prefix + "&c&oA group by the name of " + '"' + groupName + '"' + " doesn't exist in world " + '"' + worldName + '"');
@@ -169,10 +178,18 @@ public class UserSetGroup extends BukkitCommand {
             }
             users.getConfig().set("User-List." + um.usernameToUUID(playerName) + ".group", groupName);
             users.saveConfig();
-            System.out.println(String.format("[%s] - Updated user " + '"' + playerName + '"' + " to group " + '"' + groupName + '"' + " in world " + '"' + worldName + '"', HempfestPermissions.getInstance().getDescription().getName()));
+            System.out.println(String.format("[%s] - Updated user " + '"' + playerName + '"' + " to group " + '"' + groupName + '"' + " in world " + '"' + worldName + '"', MyPermissions.getInstance().getDescription().getName()));
             sendMessage(p, um.prefix + "&d&oUpdated user " + '"' + playerName + '"' + " to group " + '"' + groupName + '"' + " in world " + '"' + worldName + '"');
-            if (Bukkit.getOfflinePlayer(um.usernameToUUID(playerName)).isOnline()) {
-                sendMessage(Bukkit.getPlayer(playerName), um.prefix + "&e&oYou've been moved to rank &f&n" + groupName);
+            OfflinePlayer target = Bukkit.getOfflinePlayer(um.usernameToUUID(playerName));
+            if (target.isOnline()) {
+                sendMessage(Objects.requireNonNull(target.getPlayer()), um.prefix + "&e&oYou've been moved to rank &f&n" + groupName);
+            }
+            UserPermissionUpdateEvent event = new UserPermissionUpdateEvent(PermissionUpdateType.Added, target.getUniqueId().toString(), worldName, MyPermissions.getInstance().getPermissionHook().playerDirectPermissions(target.getUniqueId(), worldName));
+            Bukkit.getPluginManager().callEvent(event);
+            if (!event.isCancelled()) {
+                if (target.isOnline()) {
+                    event.query(target.getPlayer());
+                }
             }
         }
 

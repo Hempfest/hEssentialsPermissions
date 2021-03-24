@@ -1,6 +1,6 @@
 package com.youtube.hempfest.permissions.util.events;
 
-import com.youtube.hempfest.permissions.HempfestPermissions;
+import com.youtube.hempfest.permissions.MyPermissions;
 import com.youtube.hempfest.permissions.util.events.misc.PermissionUpdateType;
 import org.bukkit.event.HandlerList;
 
@@ -18,7 +18,7 @@ public class GroupPermissionUpdateEvent extends UserPermissionUpdateEvent {
 
 	@Override
 	public String[] getHolderPerms() {
-		return HempfestPermissions.getInstance().listener.groupPermissions(group, world);
+		return MyPermissions.getInstance().getPermissionHook().groupPermissions(group, world);
 	}
 
 	@Override

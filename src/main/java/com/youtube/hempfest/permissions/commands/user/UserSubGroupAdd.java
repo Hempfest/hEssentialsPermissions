@@ -1,21 +1,20 @@
 package com.youtube.hempfest.permissions.commands.user;
 
-import com.youtube.hempfest.permissions.HempfestPermissions;
-import com.youtube.hempfest.permissions.util.events.PermissionUpdateEvent;
-import com.youtube.hempfest.permissions.util.yml.Config;
-import com.youtube.hempfest.permissions.util.yml.DataManager;
+import com.github.sanctum.labyrinth.data.FileManager;
+import com.youtube.hempfest.permissions.MyPermissions;
 import com.youtube.hempfest.permissions.util.UtilityManager;
+import com.youtube.hempfest.permissions.util.events.PermissionUpdateEvent;
 import com.youtube.hempfest.permissions.util.layout.PermissionHook;
+import com.youtube.hempfest.permissions.util.yml.DataManager;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.World;
 import org.bukkit.command.CommandSender;
 import org.bukkit.command.defaults.BukkitCommand;
 import org.bukkit.entity.Player;
-
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
 
 public class UserSubGroupAdd extends BukkitCommand {
 
@@ -30,7 +29,7 @@ public class UserSubGroupAdd extends BukkitCommand {
     }
 
     private String notPlayer() {
-        return String.format("[%s] - You aren't a player..", HempfestPermissions.getInstance().getDescription().getName());
+        return String.format("[%s] - You aren't a player..", MyPermissions.getInstance().getDescription().getName());
     }
 
     private final List<String> arguments = new ArrayList<String>();
@@ -69,12 +68,12 @@ public class UserSubGroupAdd extends BukkitCommand {
             }
             return result;
         }
-        return null;
+        return super.tabComplete(sender, alias, args);
     }
 
     @Override
     public boolean execute(CommandSender commandSender, String commandLabel, String[] args) {
-        UtilityManager um = new UtilityManager();
+        UtilityManager um = MyPermissions.getInstance().getManager();
         PermissionHook listener = new PermissionHook();
         if (!(commandSender instanceof Player)) {
             int length = args.length;
@@ -98,7 +97,7 @@ public class UserSubGroupAdd extends BukkitCommand {
                     sendMessage(commandSender, um.prefix + "&c&oWorld " + '"' + worldName + '"' + " not found.");
                     return true;
                 }
-                Config users = dm.getUsers(worldName);
+                FileManager users = dm.getUsers(worldName);
                 if (!Arrays.asList(listener.getAllGroups(worldName)).contains(groupName)) {
                     sendMessage(commandSender, um.prefix + "&c&oA group by the name of " + '"' + groupName + '"' + " doesn't exist in world " + '"' + worldName + '"');
                     return true;
@@ -116,7 +115,7 @@ public class UserSubGroupAdd extends BukkitCommand {
                 users.getConfig().set("User-List." + um.usernameToUUID(playerName) + ".sub-groups", sgroups);
                 users.saveConfig();
                 sendMessage(commandSender, um.prefix + "&a&oAdded sub-group " + '"' + groupName + '"' + " to player " + '"' + playerName + '"' + " inheritance list in world " + '"' + worldName + '"');
-                System.out.println(String.format("[%s] - Added sub-group inheritance " + '"' + groupName + '"' + " to player " + '"' + playerName + '"' + " inheritance list in world " + '"' + worldName + '"', HempfestPermissions.getInstance().getDescription().getName()));
+                System.out.println(String.format("[%s] - Added sub-group inheritance " + '"' + groupName + '"' + " to player " + '"' + playerName + '"' + " inheritance list in world " + '"' + worldName + '"', MyPermissions.getInstance().getDescription().getName()));
                 PermissionUpdateEvent event = new PermissionUpdateEvent();
                 Bukkit.getPluginManager().callEvent(event);
                 if (!event.isCancelled()) {
@@ -163,13 +162,17 @@ public class UserSubGroupAdd extends BukkitCommand {
                 sendMessage(p, um.prefix + "&c&oWorld " + '"' + worldName + '"' + " not found.");
                 return true;
             }
-            Config users = dm.getUsers(worldName);
+            FileManager users = dm.getUsers(worldName);
             if (!Arrays.asList(listener.getAllGroups(worldName)).contains(groupName)) {
                 sendMessage(p, um.prefix + "&c&oA group by the name of " + '"' + groupName + '"' + " doesn't exist in world " + '"' + worldName + '"');
                 return true;
             }
             if (!Arrays.asList(listener.getAllUserNames(worldName)).contains(playerName)) {
                 sendMessage(p, um.prefix + "&c&oA user by the name of " + '"' + playerName + '"' + " was not found in world " + '"' + worldName + '"');
+                return true;
+            }
+            if (MyPermissions.getInstance().getPermissionHook().groupWeight(MyPermissions.getInstance().getPermissionHook().getGroup(um.usernameToUUID(playerName), worldName), worldName) >= MyPermissions.getInstance().getPermissionHook().groupWeight(MyPermissions.getInstance().getPermissionHook().getGroup(p, worldName), worldName)) {
+                sendMessage(p, um.prefix + "&c&oThis user has higher than or equal to rank priority, unable to modify user permissions.");
                 return true;
             }
             List<String> sgroups = users.getConfig().getStringList("User-List." + um.usernameToUUID(playerName) + ".sub-groups");
@@ -181,7 +184,7 @@ public class UserSubGroupAdd extends BukkitCommand {
             users.getConfig().set("User-List." + um.usernameToUUID(playerName) + ".sub-groups", sgroups);
             users.saveConfig();
             sendMessage(p, um.prefix + "&a&oAdded sub-group " + '"' + groupName + '"' + " to player " + '"' + playerName + '"' + " inheritance list in world " + '"' + worldName + '"');
-            System.out.println(String.format("[%s] - Added sub-group inheritance " + '"' + groupName + '"' + " to player " + '"' + playerName + '"' + " inheritance list in world " + '"' + worldName + '"', HempfestPermissions.getInstance().getDescription().getName()));
+            System.out.println(String.format("[%s] - Added sub-group inheritance " + '"' + groupName + '"' + " to player " + '"' + playerName + '"' + " inheritance list in world " + '"' + worldName + '"', MyPermissions.getInstance().getDescription().getName()));
             return true;
         }
 

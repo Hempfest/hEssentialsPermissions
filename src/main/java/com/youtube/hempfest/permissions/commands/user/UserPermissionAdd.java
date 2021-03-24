@@ -1,6 +1,6 @@
 package com.youtube.hempfest.permissions.commands.user;
 
-import com.youtube.hempfest.permissions.HempfestPermissions;
+import com.youtube.hempfest.permissions.MyPermissions;
 import com.youtube.hempfest.permissions.util.UtilityManager;
 import com.youtube.hempfest.permissions.util.layout.PermissionHook;
 import org.bukkit.Bukkit;
@@ -14,6 +14,7 @@ import org.bukkit.entity.Player;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import org.jetbrains.annotations.NotNull;
 
 public class UserPermissionAdd extends BukkitCommand {
 
@@ -28,7 +29,7 @@ public class UserPermissionAdd extends BukkitCommand {
     }
 
     private String notPlayer() {
-        return String.format("[%s] - You aren't a player..", HempfestPermissions.getInstance().getDescription().getName());
+        return String.format("[%s] - You aren't a player..", MyPermissions.getInstance().getDescription().getName());
     }
 
     private final List<String> arguments = new ArrayList<String>();
@@ -58,12 +59,39 @@ public class UserPermissionAdd extends BukkitCommand {
             }
             return result;
         }
-        return null;
+        if (args.length == 3) {
+            arguments.clear();
+            arguments.addAll(MyPermissions.getInstance().getManager().getPermissionsLibrary());
+            for (String a : arguments) {
+                if (a.toLowerCase().startsWith(args[2].toLowerCase()))
+                    result.add(a);
+            }
+            return result;
+        }
+        if (args.length == 4) {
+            arguments.clear();
+            arguments.addAll(MyPermissions.getInstance().getManager().getPermissionsLibrary());
+            for (String a : arguments) {
+                if (a.toLowerCase().startsWith(args[3].toLowerCase()))
+                    result.add(a);
+            }
+            return result;
+        }
+        if (args.length == 5) {
+            arguments.clear();
+            arguments.addAll(MyPermissions.getInstance().getManager().getPermissionsLibrary());
+            for (String a : arguments) {
+                if (a.toLowerCase().startsWith(args[4].toLowerCase()))
+                    result.add(a);
+            }
+            return result;
+        }
+        return super.tabComplete(sender, alias, args);
     }
 
     @Override
-    public boolean execute(CommandSender commandSender, String commandLabel, String[] args) {
-        UtilityManager um = new UtilityManager();
+    public boolean execute(@NotNull CommandSender commandSender, @NotNull String commandLabel, String[] args) {
+        UtilityManager um = MyPermissions.getInstance().getManager();
         PermissionHook listener = new PermissionHook();
         if (!(commandSender instanceof Player)) {
             int length = args.length;
@@ -206,6 +234,10 @@ public class UserPermissionAdd extends BukkitCommand {
                     sendMessage(p, um.prefix + "&c&oA user by the name of " + '"' + playerName + '"' + " was not found in world " + '"' + worldName + '"');
                     return true;
                 }
+                if (MyPermissions.getInstance().getPermissionHook().groupWeight(MyPermissions.getInstance().getPermissionHook().getGroup(um.usernameToUUID(playerName), worldName), worldName) >= MyPermissions.getInstance().getPermissionHook().groupWeight(MyPermissions.getInstance().getPermissionHook().getGroup(p, worldName), worldName)) {
+                    sendMessage(p, um.prefix + "&c&oThis user has higher than or equal to rank priority, unable to modify user permissions.");
+                    return true;
+                }
                 List<String> permList = Arrays.asList(listener.playerDirectPermissions(um.usernameToUUID(playerName), worldName));
                 if (permList.contains(permission)) {
                     sendMessage(p, um.prefix + "&c&oPlayer " + '"' + playerName + '"' + " already has direct access to permission " + '"' + permission + '"' + " in world " + '"' + worldName + '"');
@@ -229,6 +261,10 @@ public class UserPermissionAdd extends BukkitCommand {
             String permission2 = args[3];
             if (!Arrays.asList(listener.getAllUserNames(worldName)).contains(playerName)) {
                 sendMessage(p, um.prefix + "&c&oA user by the name of " + '"' + playerName + '"' + " was not found in world " + '"' + worldName + '"');
+                return true;
+            }
+            if (MyPermissions.getInstance().getPermissionHook().groupWeight(MyPermissions.getInstance().getPermissionHook().getGroup(um.usernameToUUID(playerName), worldName), worldName) >= MyPermissions.getInstance().getPermissionHook().groupWeight(MyPermissions.getInstance().getPermissionHook().getGroup(p, worldName), worldName)) {
+                sendMessage(p, um.prefix + "&c&oThis user has higher than or equal to rank priority, unable to modify user permissions.");
                 return true;
             }
             List<String> results = Arrays.asList(permission, permission2);
@@ -259,6 +295,10 @@ public class UserPermissionAdd extends BukkitCommand {
             String permission3 = args[4];
             if (!Arrays.asList(listener.getAllUserNames(worldName)).contains(playerName)) {
                 sendMessage(p, um.prefix + "&c&oA user by the name of " + '"' + playerName + '"' + " was not found in world " + '"' + worldName + '"');
+                return true;
+            }
+            if (MyPermissions.getInstance().getPermissionHook().groupWeight(MyPermissions.getInstance().getPermissionHook().getGroup(um.usernameToUUID(playerName), worldName), worldName) >= MyPermissions.getInstance().getPermissionHook().groupWeight(MyPermissions.getInstance().getPermissionHook().getGroup(p, worldName), worldName)) {
+                sendMessage(p, um.prefix + "&c&oThis user has higher than or equal to rank priority, unable to modify user permissions.");
                 return true;
             }
             List<String> results = Arrays.asList(permission, permission2, permission3);

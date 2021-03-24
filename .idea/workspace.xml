@@ -10,14 +10,55 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="b42b60b2-d90f-47a1-ad21-5568c75e59af" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/.idea/.name" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__com_github_the_h_team_mEss_b1_0_0_R6.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_jetbrains_annotations_20_1_0.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/youtube/hempfest/permissions/commands/group/GroupSetWeight.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/youtube/hempfest/permissions/util/essentials/MyConnection.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/youtube/hempfest/permissions/util/essentials/MyListeners.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/youtube/hempfest/permissions/util/essentials/MyWrapper.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/youtube/hempfest/permissions/util/gui/GUI.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/artifacts/hEssentialsPermissions.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/artifacts/hEssentialsPermissions.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/compiler.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/compiler.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__com_github_ms5984_api_MenuMan_1_0_3_SNAPSHOT.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__com_github_the_h_team_Enterprise_1_4.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/libraries/Maven__com_github_the_h_team_Enterprise_1_5.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__com_github_the_h_team_Labyrinth_1_2_7.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/libraries/Maven__com_github_the_h_team_Labyrinth_1_4_0.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/modules.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/modules.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/youtube/hempfest/permissions/HempfestPermissions.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/youtube/hempfest/permissions/HempfestPermissions.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/hEssentialsPermissions.iml" beforeDir="false" afterPath="$PROJECT_DIR$/MyPermissions.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/youtube/hempfest/permissions/HempfestPermissions.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/youtube/hempfest/permissions/MyPermissions.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/youtube/hempfest/permissions/commands/group/Group.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/youtube/hempfest/permissions/commands/group/Group.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/youtube/hempfest/permissions/commands/group/GroupDelete.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/youtube/hempfest/permissions/commands/group/GroupDelete.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/youtube/hempfest/permissions/commands/group/GroupInheritanceAdd.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/youtube/hempfest/permissions/commands/group/GroupInheritanceAdd.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/youtube/hempfest/permissions/commands/group/GroupInheritanceRemove.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/youtube/hempfest/permissions/commands/group/GroupInheritanceRemove.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/youtube/hempfest/permissions/commands/group/GroupList.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/youtube/hempfest/permissions/commands/group/GroupList.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/youtube/hempfest/permissions/commands/group/GroupLoad.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/youtube/hempfest/permissions/commands/group/GroupLoad.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/youtube/hempfest/permissions/commands/group/GroupMake.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/youtube/hempfest/permissions/commands/group/GroupMake.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/youtube/hempfest/permissions/commands/group/GroupPermissionAdd.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/youtube/hempfest/permissions/commands/group/GroupPermissionAdd.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/youtube/hempfest/permissions/commands/group/GroupPermissionList.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/youtube/hempfest/permissions/commands/group/GroupPermissionList.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/youtube/hempfest/permissions/util/EventListener.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/youtube/hempfest/permissions/util/EventListener.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/youtube/hempfest/permissions/commands/group/GroupPermissionRemove.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/youtube/hempfest/permissions/commands/group/GroupPermissionRemove.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/youtube/hempfest/permissions/commands/user/User.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/youtube/hempfest/permissions/commands/user/User.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/youtube/hempfest/permissions/commands/user/UserLoad.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/youtube/hempfest/permissions/commands/user/UserLoad.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/youtube/hempfest/permissions/commands/user/UserPermissionAdd.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/youtube/hempfest/permissions/commands/user/UserPermissionAdd.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/youtube/hempfest/permissions/commands/user/UserPermissionList.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/youtube/hempfest/permissions/commands/user/UserPermissionList.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/youtube/hempfest/permissions/commands/user/UserPermissionRemove.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/youtube/hempfest/permissions/commands/user/UserPermissionRemove.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/youtube/hempfest/permissions/commands/user/UserSetGroup.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/youtube/hempfest/permissions/commands/user/UserSetGroup.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/youtube/hempfest/permissions/commands/user/UserSubGroupAdd.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/youtube/hempfest/permissions/commands/user/UserSubGroupAdd.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/youtube/hempfest/permissions/commands/user/UserSubGroupRemove.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/youtube/hempfest/permissions/commands/user/UserSubGroupRemove.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/youtube/hempfest/permissions/util/EventListener.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/youtube/hempfest/permissions/util/listener/PlayerEventListener.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/youtube/hempfest/permissions/util/UtilityManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/youtube/hempfest/permissions/util/UtilityManager.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/youtube/hempfest/permissions/util/events/GroupPermissionUpdateEvent.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/youtube/hempfest/permissions/util/events/GroupPermissionUpdateEvent.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/youtube/hempfest/permissions/util/events/PermissionUpdateEvent.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/youtube/hempfest/permissions/util/events/PermissionUpdateEvent.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/youtube/hempfest/permissions/util/events/UserPermissionUpdateEvent.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/youtube/hempfest/permissions/util/events/UserPermissionUpdateEvent.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/youtube/hempfest/permissions/util/layout/PermissionBase.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/youtube/hempfest/permissions/util/layout/PermissionBase.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/youtube/hempfest/permissions/util/yml/Config.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/youtube/hempfest/permissions/util/yml/Config.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/youtube/hempfest/permissions/util/layout/PermissionHook.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/youtube/hempfest/permissions/util/layout/PermissionHook.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/youtube/hempfest/permissions/util/vault/VaultPermissions.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/youtube/hempfest/permissions/util/vault/VaultPermissions.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/youtube/hempfest/permissions/util/vault/VaultSetup.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/youtube/hempfest/permissions/util/vault/VaultSetup.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/youtube/hempfest/permissions/util/yml/Config.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/youtube/hempfest/permissions/util/yml/DataManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/youtube/hempfest/permissions/util/yml/DataManager.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/Config.yml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/Config.yml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/plugin.yml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/plugin.yml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -53,22 +94,71 @@
     <property name="AnalyzeApkAction.lastApkPath" value="$PROJECT_DIR$" />
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$/src/main/resources" />
-    <property name="project.structure.last.edited" value="Artifacts" />
+    <property name="project.structure.last.edited" value="Project" />
     <property name="project.structure.proportion" value="0.15" />
     <property name="project.structure.side.proportion" value="0.2" />
     <property name="run.code.analysis.last.selected.profile" value="pProject Default" />
   </component>
   <component name="RecentsManager">
     <key name="CopyClassDialog.RECENTS_KEY">
+      <recent name="com.youtube.hempfest.permissions.commands.group" />
       <recent name="com.youtube.hempfest.permissions.util.nms" />
       <recent name="com.youtube.hempfest.permissions.commands.user" />
       <recent name="com.youtube.hempfest.permissions.util.events" />
       <recent name="com.youtube.hempfest.permissions.util.yml" />
-      <recent name="com.youtube.hempfest.permissions.util" />
     </key>
     <key name="CopyFile.RECENT_KEYS">
       <recent name="D:\Users\four2\Desktop\workspace\hEssentialsPermissions\src\main\resources" />
     </key>
+  </component>
+  <component name="RunManager">
+    <configuration default="true" type="JetRunConfigurationType">
+      <module name="MyPermissions" />
+      <option name="VM_PARAMETERS" />
+      <option name="PROGRAM_PARAMETERS" />
+      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
+      <option name="ALTERNATIVE_JRE_PATH" />
+      <option name="PASS_PARENT_ENVS" value="true" />
+      <option name="MAIN_CLASS_NAME" />
+      <option name="WORKING_DIRECTORY" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration default="true" type="KotlinStandaloneScriptRunConfigurationType">
+      <module name="MyPermissions" />
+      <option name="filePath" />
+      <option name="vmParameters" />
+      <option name="alternativeJrePath" />
+      <option name="programParameters" />
+      <option name="passParentEnvs" value="true" />
+      <option name="workingDirectory" />
+      <option name="isAlternativeJrePathEnabled" value="false" />
+      <option name="VM_PARAMETERS" />
+      <option name="PROGRAM_PARAMETERS" />
+      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
+      <option name="ALTERNATIVE_JRE_PATH" />
+      <option name="PASS_PARENT_ENVS" value="true" />
+      <option name="MAIN_CLASS_NAME" />
+      <option name="WORKING_DIRECTORY" />
+      <option name="filePath" />
+      <option name="vmParameters" />
+      <option name="alternativeJrePath" />
+      <option name="programParameters" />
+      <option name="passParentEnvs" value="true" />
+      <option name="workingDirectory" />
+      <option name="isAlternativeJrePathEnabled" value="false" />
+      <option name="VM_PARAMETERS" />
+      <option name="PROGRAM_PARAMETERS" />
+      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
+      <option name="ALTERNATIVE_JRE_PATH" />
+      <option name="PASS_PARENT_ENVS" value="true" />
+      <option name="MAIN_CLASS_NAME" />
+      <option name="WORKING_DIRECTORY" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
   </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
@@ -233,24 +323,32 @@
       <option name="project" value="LOCAL" />
       <updated>1613964851286</updated>
     </task>
-    <option name="localTasksCounter" value="23" />
+    <task id="LOCAL-00023" summary="* Now selecting user perms from memory instead of harddrive.">
+      <created>1614040567041</created>
+      <option name="number" value="00023" />
+      <option name="presentableId" value="LOCAL-00023" />
+      <option name="project" value="LOCAL" />
+      <updated>1614040567041</updated>
+    </task>
+    <option name="localTasksCounter" value="24" />
     <servers />
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="awdawd" />
     <MESSAGE value="* Well then.. Memory leak solved. No more runnable." />
     <MESSAGE value="* Fully optimized and ready for public use! Hooray! :D" />
-    <option name="LAST_COMMIT_MESSAGE" value="* Fully optimized and ready for public use! Hooray! :D" />
+    <MESSAGE value="* Now selecting user perms from memory instead of harddrive." />
+    <option name="LAST_COMMIT_MESSAGE" value="* Now selecting user perms from memory instead of harddrive." />
   </component>
   <component name="WindowStateProjectService">
     <state x="746" y="1534" key="#Project_Structure" timestamp="1610952133617">
       <screen x="306" y="1440" width="1920" height="1040" />
     </state>
     <state x="746" y="1534" key="#Project_Structure/0.0.2560.1400/306.1440.1920.1040@306.1440.1920.1040" timestamp="1610952133617" />
-    <state x="1120" y="1742" key="#com.intellij.ide.util.MemberChooser" timestamp="1613961291728">
+    <state x="1120" y="1742" key="#com.intellij.ide.util.MemberChooser" timestamp="1616587054866">
       <screen x="306" y="1440" width="1920" height="1040" />
     </state>
-    <state x="1120" y="1742" key="#com.intellij.ide.util.MemberChooser/0.0.2560.1400/306.1440.1920.1040@306.1440.1920.1040" timestamp="1613961291728" />
+    <state x="1120" y="1742" key="#com.intellij.ide.util.MemberChooser/0.0.2560.1400/306.1440.1920.1040@306.1440.1920.1040" timestamp="1616587054866" />
     <state x="562" y="1440" key="#com.intellij.refactoring.rename.AutomaticRenamingDialog" timestamp="1610957802795">
       <screen x="306" y="1440" width="1920" height="1040" />
     </state>
@@ -259,10 +357,10 @@
       <screen x="306" y="1440" width="1920" height="1040" />
     </state>
     <state x="996" y="1708" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog/0.0.2560.1400/306.1440.1920.1040@306.1440.1920.1040" timestamp="1610959218615" />
-    <state x="766" y="1443" key="CommitChangelistDialog2" timestamp="1613964849727">
+    <state x="766" y="1443" key="CommitChangelistDialog2" timestamp="1614040566376">
       <screen x="306" y="1440" width="1920" height="1040" />
     </state>
-    <state x="766" y="1443" key="CommitChangelistDialog2/0.0.2560.1400/306.1440.1920.1040@306.1440.1920.1040" timestamp="1613964849727" />
+    <state x="766" y="1443" key="CommitChangelistDialog2/0.0.2560.1400/306.1440.1920.1040@306.1440.1920.1040" timestamp="1614040566376" />
     <state x="1101" y="1768" key="FileChooserDialogImpl" timestamp="1609673209808">
       <screen x="306" y="1440" width="1920" height="1040" />
     </state>
@@ -275,14 +373,14 @@
       <screen x="306" y="1440" width="1920" height="1040" />
     </state>
     <state x="898" y="1577" key="Github.UntrackedFilesDialog/0.0.2560.1400/306.1440.1920.1040@306.1440.1920.1040" timestamp="1610951410320" />
-    <state x="746" y="1534" key="SettingsEditor" timestamp="1613962031034">
+    <state x="746" y="1534" key="SettingsEditor" timestamp="1616574452095">
       <screen x="306" y="1440" width="1920" height="1040" />
     </state>
-    <state x="746" y="1534" key="SettingsEditor/0.0.2560.1400/306.1440.1920.1040@306.1440.1920.1040" timestamp="1613962031034" />
-    <state x="858" y="1689" key="Vcs.Push.Dialog.v2" timestamp="1613964852647">
+    <state x="746" y="1534" key="SettingsEditor/0.0.2560.1400/306.1440.1920.1040@306.1440.1920.1040" timestamp="1616574452095" />
+    <state x="858" y="1689" key="Vcs.Push.Dialog.v2" timestamp="1614040568232">
       <screen x="306" y="1440" width="1920" height="1040" />
     </state>
-    <state x="858" y="1689" key="Vcs.Push.Dialog.v2/0.0.2560.1400/306.1440.1920.1040@306.1440.1920.1040" timestamp="1613964852647" />
+    <state x="858" y="1689" key="Vcs.Push.Dialog.v2/0.0.2560.1400/306.1440.1920.1040@306.1440.1920.1040" timestamp="1614040568232" />
     <state x="543" y="1582" key="new project wizard" timestamp="1611016377167">
       <screen x="306" y="1440" width="1920" height="1040" />
     </state>

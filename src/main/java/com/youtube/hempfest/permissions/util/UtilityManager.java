@@ -1,7 +1,8 @@
 package com.youtube.hempfest.permissions.util;
 
-import com.youtube.hempfest.permissions.HempfestPermissions;
-import com.youtube.hempfest.permissions.util.yml.Config;
+import com.github.sanctum.labyrinth.data.FileManager;
+import com.github.sanctum.labyrinth.task.Schedule;
+import com.youtube.hempfest.permissions.MyPermissions;
 import com.youtube.hempfest.permissions.util.yml.DataManager;
 import java.io.File;
 import java.io.InputStream;
@@ -10,6 +11,7 @@ import java.util.Arrays;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.UUID;
 import org.bukkit.Bukkit;
 import org.bukkit.OfflinePlayer;
@@ -18,127 +20,158 @@ import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.entity.Player;
 
 public class UtilityManager {
-    Player p;
+    protected Player p;
 
     public String prefix = "&7[&bhPermissions&7]&r ";
 
-    public HashMap<Player, List<String>> userPermissions = new HashMap<>();
+    public Map<Player, List<String>> userPermissions = new HashMap<>();
 
-    public UtilityManager() {}
+    public FileManager FILE;
 
-    public UtilityManager(Player executor) {
+    protected UtilityManager() {
+    }
+
+    protected UtilityManager(Player executor) {
         this.p = executor;
+    }
+
+    public static UtilityManager get(Player... p) {
+        UtilityManager manager = new UtilityManager();
+        if (!Arrays.asList(p).isEmpty()) {
+            manager.p = Arrays.asList(p).get(0);
+        }
+        return manager;
     }
 
     public boolean runningVault() {
         return Bukkit.getPluginManager().isPluginEnabled("Vault");
     }
 
+    public List<String> getPermissionsLibrary() {
+        return FILE.getConfig().getStringList("used-nodes");
+    }
+
+    public void inject(String permission) {
+        Schedule.sync(() -> {
+            if (!FILE.getConfig().getStringList("used-nodes").contains(permission)) {
+                List<String> perms = new ArrayList<>(FILE.getConfig().getStringList("used-nodes"));
+                perms.add(permission);
+                FILE.getConfig().set("used-nodes", perms);
+                FILE.saveConfig();
+            }
+        }).debug().run();
+    }
+
     public void generateConfig() {
-        Config main = Config.get("Config", "data");
+        FileManager main = MyPermissions.getInstance().getFileList().find("Config", "data");
         if (!main.exists()) {
-            InputStream is = HempfestPermissions.getInstance().getResource("Config.yml");
-            Config.copy(is, main.getFile());
+            InputStream is = MyPermissions.getInstance().getResource("Config.yml");
+            assert is != null;
+            FileManager.copy(is, main.getFile());
         }
     }
 
     public void generateWorlds() {
         for (String w : getWorlds()) {
-            Config toGenerate = Config.get("Groups", "worlds/" + w);
-            Config usersFile = Config.get("Users", "worlds/" + w);
+            FileManager toGenerate = MyPermissions.getInstance().getFileList().find("Groups", "worlds/" + w);
+            FileManager usersFile = MyPermissions.getInstance().getFileList().find("Users", "worlds/" + w);
             if (!toGenerate.exists() || toGenerate.getConfig().getKeys(false).isEmpty()) {
                 FileConfiguration world = toGenerate.getConfig();
-                for (String def : getDefaultRanks()) {
-                    List<String> dperm = new ArrayList<>();
-                    List<String> dinher = new ArrayList<>();
-                    if (def.equals("Moderator")) {
-                        dperm.add("hessentials.staff");
-                        dperm.add("hessentials.staff.kick");
-                        dperm.add("hessentials.staff.kickall");
-                        dperm.add("hessentials.staff.day");
-                        dperm.add("hessentials.staff.night");
-                        dinher.add("Default");
+                for (String rank : getDefaultRanks()) {
+                    List<String> defaultP = new ArrayList<>();
+                    List<String> defaultI = new ArrayList<>();
+                    if (rank.equals("Moderator")) {
+                        defaultP.add("mess.staff");
+                        defaultP.add("mess.staff.kick");
+                        defaultP.add("mess.staff.kickall");
+                        defaultP.add("mess.staff.day");
+                        defaultP.add("mess.staff.night");
+
+                        defaultI.add("Default");
                     }
-                    if (def.equals("Builder")) {
-                        dperm.add("minecraft.command.gamemode");
-                        dinher.add("Default");
+                    if (rank.equals("Builder")) {
+                        defaultP.add("minecraft.command.gamemode");
+
+                        defaultI.add("Default");
                     }
-                    if (def.equals("Admin")) {
-                        dperm.add("hpermissions.group.add.permissions");
-                        dperm.add("hpermissions.group.add.inheritance");
-                        dperm.add("hpermissions.group.remove.permissions");
-                        dperm.add("hpermissions.group.add.inheritance");
-                        dperm.add("hpermissions.group.list.permissions");
-                        dperm.add("hpermissions.group.create");
-                        dperm.add("hpermissions.user.add.permission");
-                        dperm.add("hpermissions.user.remove.permission");
-                        dperm.add("hpermissions.user.set.group");
-                        dperm.add("hpermissions.user.add.group");
-                        dperm.add("hpermissions.user.remove.group");
-                        dperm.add("hpermissions.group.list");
-                        dperm.add("hpermissions.group.reload");
-                        dperm.add("hpermissions.user.reload");
-                        dperm.add("hpermissions.group.delete");
-                        dperm.add("minecraft.command.ban");
-                        dperm.add("minecraft.command.ban-ip");
-                        dperm.add("minecraft.command.banlist");
-                        dperm.add("minecraft.command.enchant");
-                        dperm.add("minecraft.command.kick");
-                        dperm.add("minecraft.command.kill");
-                        dperm.add("minecraft.command.pardon");
-                        dperm.add("minecraft.command.pardon-ip");
-                        dinher.add("Default");
-                        dinher.add("Moderator");
-                        dinher.add("Builder");
+                    if (rank.equals("Admin")) {
+                        defaultP.add("mess.group.add.permissions");
+                        defaultP.add("mess.group.remove.permissions");
+                        defaultP.add("mess.group.add.inheritance");
+                        defaultP.add("mess.group.list.permissions");
+                        defaultP.add("mess.group.create");
+                        defaultP.add("mess.user.add.permission");
+                        defaultP.add("mess.user.remove.permission");
+                        defaultP.add("mess.user.set.group");
+                        defaultP.add("mess.user.add.group");
+                        defaultP.add("mess.user.remove.group");
+                        defaultP.add("mess.group.list");
+                        defaultP.add("mess.group.reload");
+                        defaultP.add("mess.user.reload");
+                        defaultP.add("mess.group.delete");
+                        defaultP.add("mess.group");
+                        defaultP.add("mess.user");
+                        defaultP.add("minecraft.command.ban");
+                        defaultP.add("minecraft.command.ban-ip");
+                        defaultP.add("minecraft.command.banlist");
+                        defaultP.add("minecraft.command.enchant");
+                        defaultP.add("minecraft.command.kick");
+                        defaultP.add("minecraft.command.kill");
+                        defaultP.add("minecraft.command.pardon");
+                        defaultP.add("minecraft.command.pardon-ip");
+
+                        defaultI.add("Default");
+                        defaultI.add("Moderator");
+                        defaultI.add("Builder");
                     }
-                    if (def.equals("Owner")) {
-                        dperm.add("minecraft.command.advancement");
-                        dperm.add("minecraft.command.clear");
-                        dperm.add("minecraft.command.debug");
-                        dperm.add("minecraft.command.defaultgamemode");
-                        dperm.add("minecraft.command.deop");
-                        dperm.add("minecraft.command.difficulty");
-                        dperm.add("minecraft.command.effect");
-                        dperm.add("minecraft.command.gamerule");
-                        dperm.add("minecraft.command.list");
-                        dperm.add("minecraft.command.op");
-                        dperm.add("minecraft.command.playsound");
-                        dperm.add("minecraft.command.save-all");
-                        dperm.add("minecraft.command.save-off");
-                        dperm.add("minecraft.command.save-on");
-                        dperm.add("minecraft.command.say");
-                        dperm.add("minecraft.command.scoreboard");
-                        dperm.add("minecraft.command.seed");
-                        dperm.add("minecraft.command.setblock");
-                        dperm.add("minecraft.command.fill");
-                        dperm.add("minecraft.command.setidletimeout");
-                        dperm.add("minecraft.command.setworldspawn");
-                        dperm.add("minecraft.command.spawnpoint");
-                        dperm.add("minecraft.command.spreadplayers");
-                        dperm.add("minecraft.command.stop");
-                        dperm.add("minecraft.command.summon");
-                        dperm.add("minecraft.command.tellraw");
-                        dperm.add("minecraft.command.testfor");
-                        dperm.add("minecraft.command.testforblock");
-                        dperm.add("minecraft.command.time");
-                        dperm.add("minecraft.command.toggledownfall");
-                        dperm.add("minecraft.command.teleport");
-                        dperm.add("minecraft.command.weather");
-                        dperm.add("minecraft.command.whitelist");
-                        dinher.add("Admin");
-                        dinher.add("Moderator");
-                        dinher.add("Default");
-                        dinher.add("Builder");
+                    if (rank.equals("Owner")) {
+                        defaultP.add("minecraft.command.advancement");
+                        defaultP.add("minecraft.command.clear");
+                        defaultP.add("minecraft.command.debug");
+                        defaultP.add("minecraft.command.defaultgamemode");
+                        defaultP.add("minecraft.command.deop");
+                        defaultP.add("minecraft.command.difficulty");
+                        defaultP.add("minecraft.command.effect");
+                        defaultP.add("minecraft.command.gamerule");
+                        defaultP.add("minecraft.command.list");
+                        defaultP.add("minecraft.command.op");
+                        defaultP.add("minecraft.command.playsound");
+                        defaultP.add("minecraft.command.save-all");
+                        defaultP.add("minecraft.command.save-off");
+                        defaultP.add("minecraft.command.save-on");
+                        defaultP.add("minecraft.command.say");
+                        defaultP.add("minecraft.command.scoreboard");
+                        defaultP.add("minecraft.command.seed");
+                        defaultP.add("minecraft.command.setblock");
+                        defaultP.add("minecraft.command.fill");
+                        defaultP.add("minecraft.command.setidletimeout");
+                        defaultP.add("minecraft.command.setworldspawn");
+                        defaultP.add("minecraft.command.spawnpoint");
+                        defaultP.add("minecraft.command.spreadplayers");
+                        defaultP.add("minecraft.command.stop");
+                        defaultP.add("minecraft.command.summon");
+                        defaultP.add("minecraft.command.tellraw");
+                        defaultP.add("minecraft.command.testfor");
+                        defaultP.add("minecraft.command.testforblock");
+                        defaultP.add("minecraft.command.time");
+                        defaultP.add("minecraft.command.toggledownfall");
+                        defaultP.add("minecraft.command.teleport");
+                        defaultP.add("minecraft.command.weather");
+                        defaultP.add("minecraft.command.whitelist");
+
+                        defaultI.add("Admin");
+                        defaultI.add("Moderator");
+                        defaultI.add("Default");
+                        defaultI.add("Builder");
                     }
-                    if (def.equals("Default")) {
-                        world.set(def + ".default", true);
+                    if (rank.equals("Default")) {
+                        world.set(rank + ".default", true);
                     } else {
-                        world.set(def + ".default", false);
+                        world.set(rank + ".default", false);
                     }
-                    world.set(def + ".permissions", dperm);
-                    world.set(def + ".inheritance", dinher);
-                    world.set(def + ".use-suffix", true);
-                    world.set(def + ".prefix", "[" + getDefaultColors(def) + def + "&r]");
+                    world.set(rank + ".permissions", defaultP);
+                    world.set(rank + ".inheritance", defaultI);
+                    world.set(rank + ".weight", getDefaultWeight(rank));
                 }
                 usersFile.getConfig().createSection("User-List");
                 usersFile.saveConfig();
@@ -147,9 +180,18 @@ public class UtilityManager {
         }
     }
 
+    public void setWeight(String group, String world, int weight) {
+        DataManager dm = new DataManager();
+        FileManager toGenerate = dm.getGroups(world);
+        FileConfiguration fc = toGenerate.getConfig();
+        fc.set(group + ".weight", weight);
+        toGenerate.saveConfig();
+        MyPermissions.getInstance().getLogger().info("- Changed group " + '"' + group + '"' + " weight in world " + '"' + world + '"' + " to " + weight);
+    }
+
     public void generateNewGroup(String group, String world, String... inheritance) {
         DataManager dm = new DataManager();
-        Config toGenerate = dm.getGroups(world);
+        FileManager toGenerate = dm.getGroups(world);
         List<String> dperm = new ArrayList<>();
         List<String> dinher = new ArrayList<>();
         if (inheritance != null) {
@@ -159,23 +201,23 @@ public class UtilityManager {
         fc.set(group + ".permissions", dperm);
         fc.set(group + ".inheritance", dinher);
         fc.set(group + ".default", false);
-        fc.set(group + ".prefix", "[&l" + group + "&r]");
+        fc.set(group + ".weight", 0);
         toGenerate.saveConfig();
-        HempfestPermissions.getInstance().getLogger().info("- Generated new group " + '"' + group + '"' + " in world " + '"' + world);
+        MyPermissions.getInstance().getLogger().info("- Generated new group " + '"' + group + '"' + " in world " + '"' + world + '"');
     }
 
     public void deleteGroup(String group, String world) {
         DataManager dm = new DataManager();
-        Config toGenerate = dm.getGroups(world);
+        FileManager toGenerate = dm.getGroups(world);
         toGenerate.getConfig().set(group, null);
         toGenerate.saveConfig();
-        HempfestPermissions.getInstance().getLogger().info("[%s] - Deleted group " + '"' + group + '"' + " from world " + '"' + world + '"');
+        MyPermissions.getInstance().getLogger().info("[%s] - Deleted group " + '"' + group + '"' + " from world " + '"' + world + '"');
     }
 
     public void generateUserFile() {
         UUID id = p.getUniqueId();
         for (String w : getWorlds()) {
-            Config usersFile = new Config("Users", "worlds/" + w);
+            FileManager usersFile = MyPermissions.getInstance().getFileList().find("Users", "worlds/" + w);
             if (!usersFile.getConfig().getConfigurationSection("User-List").getKeys(false).contains(id.toString())) {
                 FileConfiguration user = usersFile.getConfig();
                 List<String> dperm = new ArrayList<>();
@@ -193,6 +235,28 @@ public class UtilityManager {
         }
     }
 
+    private int getDefaultWeight(String group) {
+        int result = 0;
+        switch (group) {
+            case "Moderator":
+            case "Builder":
+                result = 1;
+                break;
+            case "Admin":
+                result = 2;
+                break;
+            case "Owner":
+                result = 3;
+                break;
+            case "Operator":
+                result = 4;
+                break;
+
+        }
+        return result;
+    }
+
+    /*
     private String getDefaultColors(String group) {
         String result = "&f";
         switch (group) {
@@ -219,6 +283,8 @@ public class UtilityManager {
         return result;
     }
 
+     */
+
     private String[] getDefaultRanks() {
         List<String> list = new ArrayList<>();
         list.add("Default");
@@ -232,14 +298,14 @@ public class UtilityManager {
 
     public String defaultWorldGroup(String world) {
         DataManager dm = new DataManager();
-        Config groups = dm.getGroups(world);
+        FileManager groups = dm.getGroups(world);
         FileConfiguration allG = groups.getConfig();
         for (String g : allG.getKeys(false)) {
             if (allG.getBoolean(g + ".default")) {
                 return g;
             }
         }
-        HempfestPermissions.getInstance().getLogger().info("[%s] - No default group found. Please set a value to true amongst one of the groups.");
+        MyPermissions.getInstance().getLogger().info("[%s] - No default group found. Please set a value to true amongst one of the groups.");
         return null;
     }
 
@@ -252,13 +318,24 @@ public class UtilityManager {
     }
 
     public File getWorldContainer() {
-        final File dir = new File(Config.class.getProtectionDomain().getCodeSource().getLocation().getPath().replaceAll("%20", " "));
-        return new File(dir.getParentFile().getPath(), HempfestPermissions.getInstance().getName() + "/worlds/");
+        final File dir = MyPermissions.getInstance().getDataFolder();
+        return new File(dir.getParentFile().getPath(), MyPermissions.getInstance().getName() + "/worlds/");
+    }
+
+    public OfflinePlayer getUser(String name) {
+        OfflinePlayer result = null;
+        for (OfflinePlayer player : Bukkit.getOfflinePlayers()) {
+            if (player.getName().equals(name)) {
+                result = player;
+                break;
+            }
+        }
+        return result;
     }
 
     public void updateUsername(Player p) {
         DataManager dm = new DataManager();
-        Config users = dm.getUsers(p.getWorld().getName());
+        FileManager users = dm.getUsers(p.getWorld().getName());
         FileConfiguration fc = users.getConfig();
             fc.set("User-List." + p.getUniqueId().toString() + ".username", p.getName());
             users.saveConfig();
@@ -267,7 +344,7 @@ public class UtilityManager {
     public UUID usernameToUUID(String username) {
         DataManager dm = new DataManager();
         List<String> worlds = Arrays.asList(getWorlds());
-        Config world = dm.getUsers(worlds.get(0));
+        FileManager world = dm.getUsers(worlds.get(0));
         FileConfiguration w = world.getConfig();
         UUID result = null;
         for (String user : w.getConfigurationSection("User-List").getKeys(false)) {

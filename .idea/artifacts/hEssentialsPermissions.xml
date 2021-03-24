@@ -2,7 +2,7 @@
   <artifact type="jar" name="hEssentialsPermissions">
     <output-path>$PROJECT_DIR$/out/artifacts/hEssentialsPermissions</output-path>
     <root id="archive" name="hEssentialsPermissions.jar">
-      <element id="module-output" name="hEssentialsPermissions" />
+      <element id="module-output" name="MyPermissions" />
     </root>
   </artifact>
 </component>
